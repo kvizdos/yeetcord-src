@@ -4,7 +4,7 @@ function isAuthenticated(req, res, next) {
     var username = req.cookies['username'];
     var token = req.cookies['token'];
 
-    mongo.confirmToken(username, token).then((resp) => {
+    mongo.confirmToken(username, token, true).then((resp) => {
         if(resp !== false) {
             console.log(resp);
             if(resp['verified'] == true) {

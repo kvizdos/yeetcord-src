@@ -121,7 +121,7 @@ async function updateToken(user) {
 }
 
 // Confirm token
-async function confirmToken(user, token) {
+async function confirmToken(user, token, disableCache = false) {
     return new Promise((resolve, reject) => {
         // check token cache
         var tokenExists = tokenCache.filter((t) => {
@@ -130,9 +130,11 @@ async function confirmToken(user, token) {
             }
         }).length == 1;
 
-        if(tokenExists) {
-            resolve({verified: result['verified']});
+        if(tokenExists && !disableCache) {
+            console.log("Skipping cache!");
+            resolve(true);
         } else {
+            console.log("Checking cache")
             MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
                 if (err) throw err;
                 var dbo = db.db("linkr");
