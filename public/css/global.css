@@ -1,0 +1,26 @@
+#alert {
+    background-color: lightgray;
+    border: 2px solid gray;
+    color: black;
+    font-size: 12pt;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    display: none;
+}
+
+.alertDanger {
+    background-color: rgb(231, 31, 31) !important;
+    border: 2px solid rgb(192, 16, 16) !important;
+    color: white !important;
+}
+
+.alertSuccess {
+    background-color: rgb(48, 207, 8) !important;
+    border: 2px solid rgb(38, 190, 0) !important;
+    color: white !important;
+}
+
+button.waiting {
+    background-color: #40649b !important;
+}

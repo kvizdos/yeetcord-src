@@ -1,0 +1,46 @@
+#loginContainer {
+    position: relative;
+    margin: 0 auto;
+    width: 500px;
+    text-align: center;    
+    margin-top: 25px;
+    border-radius: 15px !important;
+    overflow: hidden;
+    padding: 0;
+}
+
+#loginContainer h1 {
+    margin: 0;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    background-color: #134da5;
+}
+#loginContainer #container {
+    padding: 10px;
+    background-color: #376ab8;
+}
+
+#loginContainer #container input {
+    font-size: 12pt;
+    margin: 5px;
+    padding: 5px;
+    border: 0;
+    border-radius: 5px;
+}
+
+#loginContainer #container button {
+    background-color: #0d4eaf;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 12pt;
+    color: white;
+}
+
+#loginContainer #container p {
+    color: white;
+    margin: 5px; 
+    margin-top: 15px;  
+}

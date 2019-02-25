@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>🐀 !! You can't censor us !! 🐀</title>
+		
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io('http://localhost:3000');
+        </script>
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/global.css">
+
+        <script src="./js/globals.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/serverHandler.js"></script>
+
+	</head>
+	<body>
+		<div class="container-fluid" id="msgArea">
+			<div class="row">
+				<div class="col-sm-2" id="serverList">
+                    <div id="serverHeader">
+						<input placeholder="Input server ID to join" id="joinId">
+						<button id="joinServer" onclick="joinServer()">Join Server</button>
+					</div>
+					<div id="serverContainer">
+						<!--<p id="serverName" onclick="changeGuild('549317482226253836', this)">Yeetcord Official</p>-->
+					</div>
+                    <div id="serverActions">
+                        <button>Logout</button>
+                    </div>
+				</div>
+				<div class="col-sm-1" id="channelList">
+					<div id="channelContainer">
+						<!--<p id="channelName" class="for-549317482226253836" onclick="changeChannel('549317482788159529', this)">#general</p>-->
+
+					</div>
+				</div>
+				<div class="col-sm-9" id="contentArea">
+					<div id="messages">
+						
+					</div>
+					<!--
+                    <div id="messageArea" class="channel-549317482788159529">
+                        <div id="msg">
+                            <p id="msgUsername">Initializing</p>
+                            <p id="msgBody">It should be live :D</p>
+                        </div>
+					</div>
+					-->
+					<div id="inputContainer" class="bottom-column">
+						<div id="inputArea">
+							<div class="input-group">
+								<input class="form-control" placeholder="Message" id="newMsg"></input>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

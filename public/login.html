@@ -1,0 +1,43 @@
+<html>
+    <head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Login</title>
+        <link rel="stylesheet" href="./css/login.css">
+        <link rel="stylesheet" href="./css/global.css">
+
+        <script src="./js/globals.js"></script>
+        <script src="./js/login.js"></script>
+
+    </head>
+    <body>
+        <div id="loginContainer">
+            <h1>Login / Register</h1>
+            <div id="container">
+                <div id="alert" class="alertDanger">
+                    <span class="alertMsg"></span>
+                </div>
+                <div id="alert" class="alertSuccess">
+                    <span class="alertMsg"></span>
+                </div>
+                <input placeholder="Username" id="loginUsername"><br>
+                <input placeholder="Password" id="loginPassword" type="password"><br>
+                <button onclick='login()' id="loginBtn">Login</button>
+                
+                <p>Or Signup:</p>
+                <input placeholder="Username" id="createUsername"><br>
+                <input placeholder="Password" id="createPassword" type="password"><br>
+                <button onclick='signup()' id="registerBtn">Register</button>
+            </div>
+        </div>
+    </body>
+</html>

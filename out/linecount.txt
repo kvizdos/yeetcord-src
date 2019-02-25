@@ -1,0 +1,93 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-02-24 17:12:57
+count workspace : e:\Kenton Vizdos\Documents\Yeetcord
+total files : 19
+total code lines : 1835
+total comment lines : 34
+total blank lines : 192
+
+discord\config.json, code is 3, comment is 0, blank is 0.
+discord\servers.json, code is 1, comment is 0, blank is 0.
+index.js, code is 197, comment is 5, blank is 50.
+package-lock.json, code is 835, comment is 0, blank is 0.
+package.json, code is 19, comment is 0, blank is 0.
+public\css\global.css, code is 23, comment is 0, blank is 3.
+public\css\login.css, code is 42, comment is 0, blank is 4.
+public\css\main.css, code is 143, comment is 1, blank is 33.
+public\index.html, code is 7, comment is 3, blank is 4.
+public\js\globals.js, code is 81, comment is 0, blank is 3.
+public\js\login.js, code is 93, comment is 0, blank is 15.
+public\js\main.js, code is 119, comment is 5, blank is 25.
+public\js\serverHandler.js, code is 48, comment is 0, blank is 10.
+public\login.html, code is 33, comment is 3, blank is 7.
+routes\middleware.js, code is 13, comment is 0, blank is 3.
+routes\router.js, code is 8, comment is 1, blank is 5.
+routes\user.js, code is 35, comment is 0, blank is 7.
+util\mongo.js, code is 121, comment is 16, blank is 17.
+util\security.js, code is 14, comment is 0, blank is 6.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-02-24 17:13:07
+count workspace : e:\Kenton Vizdos\Documents\Yeetcord
+total files : 19
+total code lines : 1835
+total comment lines : 34
+total blank lines : 192
+
+discord\config.json, code is 3, comment is 0, blank is 0.
+discord\servers.json, code is 1, comment is 0, blank is 0.
+index.js, code is 197, comment is 5, blank is 50.
+package-lock.json, code is 835, comment is 0, blank is 0.
+package.json, code is 19, comment is 0, blank is 0.
+public\css\global.css, code is 23, comment is 0, blank is 3.
+public\css\login.css, code is 42, comment is 0, blank is 4.
+public\css\main.css, code is 143, comment is 1, blank is 33.
+public\index.html, code is 7, comment is 3, blank is 4.
+public\js\globals.js, code is 81, comment is 0, blank is 3.
+public\js\login.js, code is 93, comment is 0, blank is 15.
+public\js\main.js, code is 119, comment is 5, blank is 25.
+public\js\serverHandler.js, code is 48, comment is 0, blank is 10.
+public\login.html, code is 33, comment is 3, blank is 7.
+routes\middleware.js, code is 13, comment is 0, blank is 3.
+routes\router.js, code is 8, comment is 1, blank is 5.
+routes\user.js, code is 35, comment is 0, blank is 7.
+util\mongo.js, code is 121, comment is 16, blank is 17.
+util\security.js, code is 14, comment is 0, blank is 6.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-02-24 17:40:13
+count workspace : e:\Kenton Vizdos\Documents\Yeetcord
+total files : 19
+total code lines : 1837
+total comment lines : 34
+total blank lines : 190
+
+discord\config.json, code is 3, comment is 0, blank is 0.
+discord\servers.json, code is 1, comment is 0, blank is 0.
+index.js, code is 195, comment is 5, blank is 49.
+package-lock.json, code is 835, comment is 0, blank is 0.
+package.json, code is 19, comment is 0, blank is 0.
+public\css\global.css, code is 23, comment is 0, blank is 3.
+public\css\login.css, code is 42, comment is 0, blank is 4.
+public\css\main.css, code is 143, comment is 1, blank is 33.
+public\index.html, code is 7, comment is 3, blank is 4.
+public\js\globals.js, code is 81, comment is 0, blank is 3.
+public\js\login.js, code is 93, comment is 0, blank is 15.
+public\js\main.js, code is 119, comment is 5, blank is 23.
+public\js\serverHandler.js, code is 52, comment is 0, blank is 11.
+public\login.html, code is 33, comment is 3, blank is 7.
+routes\middleware.js, code is 13, comment is 0, blank is 3.
+routes\router.js, code is 8, comment is 1, blank is 5.
+routes\user.js, code is 35, comment is 0, blank is 7.
+util\mongo.js, code is 121, comment is 16, blank is 17.
+util\security.js, code is 14, comment is 0, blank is 6.
+===============================================================================

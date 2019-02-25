@@ -1,0 +1,177 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#serverList {
+    background-color: #376ab8;
+    height: 100%;
+    padding: 0;
+}
+
+#serverHeader {
+    background-color: #134da5;
+    width: 100%;
+    font-size: 14pt;
+    border: 0;
+    color: white;
+    padding: 10px;
+}
+
+#serverHeader input {
+    width: 100%;
+    padding: 5px;
+    color: black;
+}
+
+#serverHeader button {
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+    background-color: #376ab8;
+
+}
+
+#serverActions {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#serverActions button {
+    background-color: #134da5;
+    width: 100%;
+    font-size: 14pt;
+    padding: 19px;
+    border: 0;
+    color: white;
+}
+
+#serverList #serverContainer #serverName {
+    color: white;
+    margin: 0;
+    padding: 8px;
+    font-size: 16pt;
+    text-align: center;
+    transition: background-color 100ms linear;
+
+}
+
+#serverList #serverContainer #serverName:not(.active):hover {
+    cursor: pointer;
+    background-color: #457dd1;
+    transition: background-color 100ms linear;
+}   
+
+#channelList {
+    background-color: #174891;
+    height: 100%;
+    padding: 0;
+}
+
+#channelName {
+    display: none;
+}
+
+#channelContainer p {
+    color: white;
+    margin: 0;
+    padding: 8px;
+    font-size: 12pt;
+    text-align: center;
+    transition: background-color 100ms linear;
+
+}
+
+#channelList #channelContainer #channelName:not(.activeChannel):hover {
+    cursor: pointer;
+    background-color: #457dd1;
+    transition: background-color 100ms linear;
+}   
+
+.active {
+    background-color: #487bc7;
+}
+
+.activeChannel {
+    background-color: rgb(48, 100, 179);
+}
+
+#contentArea {
+    height: 100%;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    /* padding: 0; */
+}
+
+#inputArea {
+    width: 100%;
+}
+
+#inputArea .input-group {
+    width: 100%;
+}
+
+.bottom-column {    
+    position: absolute;
+    bottom: 0;
+}
+
+#inputContainer {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    background-color: #2a77e9;
+}
+
+input {
+    border: 0 !important;
+    font-size: 14pt !important;
+    border-radius: 5px !important;
+
+}
+
+#msgArea {
+
+}
+
+#messages #messageArea {
+    display: none;
+    height: 92.5%;
+    overflow-y: scroll;
+}
+
+#msg {
+    margin: 10px;
+    overflow: hidden;
+    border-bottom: 1.5px solid #376ab8;
+    font-size: 14pt;
+}
+
+#msgUsername {
+    margin: 0;
+    font-size: 15pt;
+    font-weight: bold;
+    color: #134da5;
+}
+
+#verifArea input {
+    width: 100%;
+    border: 1px solid black !important;
+    background-color: white !important;
+}
+
+#msgFooter {
+    font-size: 12pt;
+
+}
+
+.verified {
+    color: rgb(0, 195, 255);
+}
