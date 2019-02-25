@@ -43,6 +43,11 @@ body {
     width: 100%;
 }
 
+#serverActions p {
+    color: white;
+    text-align: center;
+}
+
 #serverActions button {
     background-color: #134da5;
     width: 100%;

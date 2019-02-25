@@ -1,0 +1,24 @@
+body {
+    background-color: #376ab8;
+    text-align: center;
+    color: white;
+}
+
+body h1 {
+    font-weight: bolder;
+}
+
+body p {
+    font-size: 14pt;
+}
+
+body a {
+    color: white;
+    font-size: 18pt;
+}
+
+#customCmd {
+    font-size: 18pt;
+    color: #00c9ec;
+
+}

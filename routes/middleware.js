@@ -5,11 +5,16 @@ function isAuthenticated(req, res, next) {
     var token = req.cookies['token'];
 
     mongo.confirmToken(username, token).then((resp) => {
-        if(resp) {
-            return next();
+        if(resp !== false) {
+            if(resp['verified'] == true) {
+                return next();
+            } else {
+                res.redirect('/verify')
+            }
         } else {
             res.redirect('/login');
         }
+        
     })
 }
 

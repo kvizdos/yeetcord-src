@@ -41,7 +41,7 @@ async function userExists(user, password = undefined, login = false, salt = unde
                             if(result['password'] == password) {
                                 updateToken(user).then((res) => {
                                     if(result['verified'] == undefined) {
-                                        dbo.collection.findOne({uid: result['uid']}, function(err, r) {
+                                        dbo.collection('codes').findOne({uid: result['uid']}, function(err, r) {
                                             resolve({status: "logged in", token: res, servers: result['servers'], uid: result['uid'], code: r['code']});
                                         })
                                     } else {
@@ -140,7 +140,7 @@ async function confirmToken(user, token) {
                         if(result !== null) {
                             var newToken = new Token(user, token);
                             tokenCache.push(newToken);
-                            resolve(true)
+                            resolve({verified: result['verified']});
                         } else {
                             resolve(false);
                         }

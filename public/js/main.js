@@ -1,9 +1,16 @@
 var auth = JSON.parse(localStorage.getItem('auth'));
+if(auth == null) {
+    alert("Username/token mismatch! Please relogin!");
+        deleteCookie('username');
+        deleteCookie('token');
+        localStorage.clear();
+        window.location.href = '/login'
+}
 var username = auth['username'];
 var token = auth['token'];
 
 function mismatchCheck(u, t) {
-    if(u !== getCookie('username') || t !== getCookie('token')) {
+    if(u !== getCookie('username') || t !== getCookie('token') || auth == null) {
         alert("Username/token mismatch! Please relogin!");
         deleteCookie('username');
         deleteCookie('token');
@@ -14,7 +21,7 @@ function mismatchCheck(u, t) {
     }
 }
 
-function updateServers(docache = localStorage.getItem('serverCache') !== null ? true : false, cache = localStorage.getItem('serverCache')) {
+function updateServers(docache = localStorage.getItem('serverCache') !== null ? true : false, cache = localStorage.getItem('serverCache'), outbound = true) {
     if(docache) {
         var data = JSON.parse(cache)
         for(var i = 0; i < data.length; i++) {
@@ -32,23 +39,30 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
             }
         }
     }
-    socket.emit('update servers', localStorage.getItem('servers'), function(data) {
-        localStorage.setItem('serverCache', JSON.stringify(data));
-        for(var i = 0; i < data.length; i++) {
-            $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']}</p>`)
-            for(let c = 0; c < data[i]['channels'].length; c++) {
-                $('#channelContainer').append(`<p id="channelName" class="for-${data[i]['id']}" onclick="changeChannel('${data[i]['channels'][c]['id']}', this)">#${data[i]['channels'][c]['name']}</p>`);
-                $('#messages').append(`
-                <div id="messageArea" class="channel-${data[i]['channels'][c]['id']}">
-                    <div id="msg">
-                        <p id="msgUsername">Initializing</p>
-                        <p id="msgBody">It should be live :D</p>
+
+    if(outbound) {
+        socket.emit('update servers', localStorage.getItem('servers'), function(data) {
+            $('#serverContainer').empty();
+            $('#channelContainer').empty();
+            $('#messages').empty();
+
+            localStorage.setItem('serverCache', JSON.stringify(data));
+            for(var i = 0; i < data.length; i++) {
+                $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']}</p>`)
+                for(let c = 0; c < data[i]['channels'].length; c++) {
+                    $('#channelContainer').append(`<p id="channelName" class="for-${data[i]['id']}" onclick="changeChannel('${data[i]['channels'][c]['id']}', this)">#${data[i]['channels'][c]['name']}</p>`);
+                    $('#messages').append(`
+                    <div id="messageArea" class="channel-${data[i]['channels'][c]['id']}">
+                        <div id="msg">
+                            <p id="msgUsername">Initializing</p>
+                            <p id="msgBody">It should be live :D</p>
+                        </div>
                     </div>
-                </div>
-                `);
+                    `);
+                }
             }
-        }
-    })
+        })
+    }
 }
 
 updateServers();

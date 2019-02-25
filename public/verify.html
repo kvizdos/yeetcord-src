@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>ChIlLaX BuDdY!</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+        <link rel="stylesheet" href="./css/verify.css">
+
+        <script>
+            $(document).ready(function() {
+                $('.userId').text(JSON.parse(localStorage.getItem('auth'))['uid'])
+                $('.verificationCode').text(JSON.parse(localStorage.getItem('auth'))['code'])
+                $('.username').text(JSON.parse(localStorage.getItem('auth'))['username'])
+            })
+
+        </script>
+    </head>
+    <body>
+        <h1>Whoa there cowboy 🤠!</h1>
+        <p>Before you enter, you need to verify your account. Please join the discord linked below and follow the instructions. Thanks ;D (you can also run !yeetcord verify in any channel with the Yeetcord Proxy Bot and it'll give you the link)</p>
+
+        <h1>Useful info ur gonna need:</h1>
+        <p>User ID: <span class="userId">X</span></p>
+        <p>Verification Code: <span class="verificationCode">X</span></p>
+        <br>
+        <p>Your own personalized command to copy and paste into the Discord chat:</p>
+        <p id="customCmd">!yeetcord verify <span class="userId">X</span> <span class="verificationCode">X</span> <span class="username">X</span></p>
+
+        <a href="https://discord.gg/Nd2RqCz" target="_blank">Please join this Discord https://discord.gg/Nd2RqCz</a>
+    </body>
+</html>

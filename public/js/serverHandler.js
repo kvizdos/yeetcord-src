@@ -35,19 +35,17 @@ function joinServer() {
             id: id
         })
 
-        console.log(id);
-        console.log(getCookie('username'));
-
         req.send(req.post).then((resp) => {
             resp = JSON.parse(resp);
 
             if(resp['status'] == "success") {
-                var servers = JSON.parse(localStorage.getItem('servers'));
+                var servers = JSON.parse(localStorage.getItem('servers')) !== null ? JSON.parse(localStorage.getItem('servers')) : [];
                 servers.push(id);
                 localStorage.setItem('servers', JSON.stringify(servers));
-                updateServers();
                 btn.removeClass('waiting');
                 btn.removeAttr('disabled');
+
+                updateServers(false);
             } else {
                 alert("Invalid join code!");
                 btn.removeClass('waiting');

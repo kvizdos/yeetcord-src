@@ -374,6 +374,304 @@
                     "filename": "util\\security.js"
                 }
             ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-02-24 20:48:44",
+            "filesum": 25,
+            "codesum": 2654,
+            "commentsum": 36,
+            "blanksum": 183,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 21,
+                    "comment": 2,
+                    "filename": "build.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "discord\\config.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "discord\\servers.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist\\js\\globals.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist\\js\\login.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist\\js\\main.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist\\js\\serverHandler.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 70,
+                    "comment": 3,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1655,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\assets\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "public\\css\\global.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "public\\css\\login.css"
+                },
+                {
+                    "blank": 34,
+                    "code": 147,
+                    "comment": 1,
+                    "filename": "public\\css\\main.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 3,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 93,
+                    "comment": 0,
+                    "filename": "public\\js\\globals.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 97,
+                    "comment": 0,
+                    "filename": "public\\js\\login.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 137,
+                    "comment": 6,
+                    "filename": "public\\js\\main.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "public\\js\\serverHandler.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 33,
+                    "comment": 3,
+                    "filename": "public\\login.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "routes\\middleware.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "routes\\router.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "routes\\user.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 167,
+                    "comment": 17,
+                    "filename": "util\\mongo.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "util\\security.js"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-02-24 20:49:29",
+            "filesum": 21,
+            "codesum": 2650,
+            "commentsum": 36,
+            "blanksum": 183,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 21,
+                    "comment": 2,
+                    "filename": "build.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "discord\\config.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "discord\\servers.json"
+                },
+                {
+                    "blank": 22,
+                    "code": 70,
+                    "comment": 3,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1655,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\assets\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "public\\css\\global.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "public\\css\\login.css"
+                },
+                {
+                    "blank": 34,
+                    "code": 147,
+                    "comment": 1,
+                    "filename": "public\\css\\main.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 3,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 93,
+                    "comment": 0,
+                    "filename": "public\\js\\globals.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 97,
+                    "comment": 0,
+                    "filename": "public\\js\\login.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 137,
+                    "comment": 6,
+                    "filename": "public\\js\\main.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "public\\js\\serverHandler.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 33,
+                    "comment": 3,
+                    "filename": "public\\login.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "routes\\middleware.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "routes\\router.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "routes\\user.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 167,
+                    "comment": 17,
+                    "filename": "util\\mongo.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "util\\security.js"
+                }
+            ]
         }
     ]
 }

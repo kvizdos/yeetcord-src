@@ -15,5 +15,11 @@
     "express": "^4.15.2",
     "mongodb": "^3.1.13",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^0.18.1"
+  },
+  "scripts": {
+    "build": "node build.js"
   }
 }

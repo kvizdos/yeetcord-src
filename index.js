@@ -39,6 +39,10 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'login.html'));
 });
 
+app.get('/verify', (req, res) => {
+    res.sendFile(path.join(__dirname, './public', 'verify.html'));
+});
+
 app.post('/join', mw.isAuthenticated, function(req, res) {
     var username = req.body['username'];
     var id = req.body['id'];
@@ -106,21 +110,24 @@ io.on('connection', function(socket){
     socket.on('update servers', function(servers, fn) {
         var guilds = [];
         var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
+        servers = JSON.parse(servers);
+        
+        if(servers !== null) {
+            for(var i = 0; i < servers.length; i++) {
+                var server = activeServers.filter((s) => {
+                    return s['ez'] == servers[i]
+                });
 
-        for(var i = 0; i < servers.length; i++) {
-            var server = activeServers.filter((s) => {
-                return s.ez == servers[i]
-            });
-
-            socket.join(server[0]['id']);
-            var channels = [];
-            client.guilds.get(server[0]['id'])['channels'].forEach((c) => {
-                if(c['type'] == 'text') {
-                    channels.push({id: c['id'], name: c['name']})
-                }
-            })
-            var newGuild = new Guild(client.guilds.get(server[0]['id'])['id'], client.guilds.get(server[0]['id'])['name'], channels);
-            guilds.push(newGuild);
+                socket.join(server[0]['id']);
+                var channels = [];
+                client.guilds.get(server[0]['id'])['channels'].forEach((c) => {
+                    if(c['type'] == 'text') {
+                        channels.push({id: c['id'], name: c['name']})
+                    }
+                })
+                var newGuild = new Guild(client.guilds.get(server[0]['id'])['id'], client.guilds.get(server[0]['id'])['name'], channels);
+                guilds.push(newGuild);
+            }
         }
 
         fn(guilds);
@@ -263,17 +270,26 @@ client.on('message', async message => {
         } else {
             switch(commandStr[1]) {
                 case "verify":
+                    if(message.guild.id == "549317482226253836") {
                     if(commandStr[4] !== undefined) {
-                        message.reply("Please hold a moment while I verify you...");
-                        mongo.verifyUser(commandStr[2], commandStr[3], message.author.toString(), commandStr[4]).then((resp) => {
-                            if(resp) {
-                                message.reply("You're all set! Enjoy verification :D (Note: You will now need to relogin)");
-                            } else {
-                                message.reply("Hmm, that code didn't work.")
-                            }
-                        })
+                            message.reply("Please hold a moment while I verify you...");
+                            mongo.verifyUser(commandStr[2], commandStr[3], message.author.toString(), commandStr[4]).then((resp) => {
+                                if(resp) {
+                                    message.reply("You're all set! Enjoy verification :D (Note: You will now need to relogin)");
+
+                                    var role = message.guild.roles.find(role => role.name === "Verified User");
+                                    message.member.addRole(role);
+
+                                } else {
+                                    message.reply("Hmm, that code didn't work.")
+                                }
+                            })
+                        } else {
+                            message.reply("Please send you're tag, verifiation code, and username along!")
+                        }
                     } else {
-                        message.reply("Please send you're tag, verifiation code, and username along!")
+                        message.reply("You must be in the Official Yeetcord Central Server. I've PM'd you the join code!");
+                        message.author.send("Hello! To verify your account, please join this server https://discord.gg/Nd2RqCz")
                     }
                     break;
             }
@@ -286,5 +302,13 @@ client.on('message', async message => {
         io.to(newMsg.guild).emit('receive message', JSON.stringify(newMsg));
     }
 })
+
+
+
+
+// AUTHORIZATION SECTION
+client.on('guildMemberAdd', member => {
+    member.guild.channels.get('549404374426976267').send("Welcome! To verify your account, please type: `!yeetcord verify <uid/tag> <verification code> <username>`. If you don't have a Yeetcord account yet, you need one @ yeetcord.tk"); 
+});
   
 client.login(discordConf.token);
