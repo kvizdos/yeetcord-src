@@ -6,6 +6,7 @@ function isAuthenticated(req, res, next) {
 
     mongo.confirmToken(username, token).then((resp) => {
         if(resp !== false) {
+            console.log(resp);
             if(resp['verified'] == true) {
                 return next();
             } else {

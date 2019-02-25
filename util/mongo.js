@@ -131,7 +131,7 @@ async function confirmToken(user, token) {
         }).length == 1;
 
         if(tokenExists) {
-            resolve(true);
+            resolve({verified: result['verified']});
         } else {
             MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
                 if (err) throw err;
