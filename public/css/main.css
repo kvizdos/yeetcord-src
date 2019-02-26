@@ -180,3 +180,30 @@ input {
 .verified {
     color: rgb(0, 195, 255);
 }
+
+
+#contentArea {
+    display: none;
+}
+
+#channelList {
+    display: none;
+}
+
+[class^='nb-g-'] {
+    float: right;
+    content: "5";
+    border-radius: 5px;
+    background-color: #1c4e99;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+[class^='nb-c-'] {
+    float: right;
+    content: "5";
+    border-radius: 5px;
+    background-color: #326eca;
+    padding-left: 5px;
+    padding-right: 5px;
+}

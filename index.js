@@ -31,6 +31,7 @@ http.listen(3000, function(){
 
 app.use('/css', express.static(path.join(__dirname, 'public/css')))
 app.use('/js', express.static(path.join(__dirname, 'public/js')))
+app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
 
 app.get('/', mw.isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'index.html'));
@@ -98,6 +99,9 @@ function escapeHtml(unsafe) {
          .replace(/'/g, "&#039;");
  }
 
+ // Displayname cache
+ var dnCache = [];
+
 io.on('connection', function(socket){
     tempUsers.push(socket.id);
     console.log('New User (#'+tempUsers.length+')');    
@@ -109,6 +113,7 @@ io.on('connection', function(socket){
 
     socket.on('update servers', function(servers, fn) {
         var guilds = [];
+        var messages = [];
         var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
         servers = JSON.parse(servers);
         
@@ -125,6 +130,7 @@ io.on('connection', function(socket){
                         channels.push({id: c['id'], name: c['name']})
                     }
                 })
+
                 var newGuild = new Guild(client.guilds.get(server[0]['id'])['id'], client.guilds.get(server[0]['id'])['name'], channels);
                 guilds.push(newGuild);
             }
@@ -139,12 +145,40 @@ io.on('connection', function(socket){
         if(msgContent['message'] !== '') {
             mongo.confirmToken(msgContent['user'], msgContent['token']).then((resp) => {
                 if(resp) {
-                    client.guilds.get(msgContent['guild']).channels.get(msgContent['channel']).send("*" + msgContent['us'] + "* >> " + msgContent['message']);
+                    var cached = dnCache.filter((c) => {
+                        return c.us == msgContent['us'] && c.guild == msgContent['guild'];
+                    })
+                    if(cached.length !== 0) {
+                        var username = cached[0].name;
+                                                    
+                        client.guilds.get(msgContent['guild']).channels.get(msgContent['channel']).send("*" + username + "* >> " + msgContent['message']);
+    
+                        msgContent['message'] = escapeHtml(msgContent['message']);
 
-                    msgContent['message'] = escapeHtml(msgContent['message']);
+                        dnCache.push({us: msgContent['us'], guild: msgContent['guild'], name: username});
 
-                    io.to(msgContent['guild']).emit('receive message', JSON.stringify(msgContent));
+                        msgContent['user'] = username;
 
+                        io.to(msgContent['guild']).emit('receive message', JSON.stringify(msgContent));    
+                    } else {
+                        var uInfo = client.guilds.get(msgContent['guild']).fetchMember(msgContent['us'].substr(2, msgContent['us'].length - 3));
+                        uInfo.then((r) => {
+                        
+                            var username = r.nickname !== null ? r.nickname : r.displayName;
+                                                    
+                            client.guilds.get(msgContent['guild']).channels.get(msgContent['channel']).send("*" + username + "* >> " + msgContent['message']);
+        
+                            msgContent['message'] = escapeHtml(msgContent['message']);
+
+                            dnCache.push({us: msgContent['us'], guild: msgContent['guild'], name: username});
+
+                            msgContent['user'] = username;
+
+                            io.to(msgContent['guild']).emit('receive message', JSON.stringify(msgContent));
+
+
+                        })
+                    }
                 } else {
                     socket.emit('mismatch');
                 }
@@ -257,6 +291,8 @@ client.on('message', async message => {
     var prefix = discordConf.prefix;
 
     var commandStr = message.content.split(" ");
+
+    console.log(message.author.toString() + " " + message.author.nickname + " " + message);
 
     if(commandStr[0] == prefix) {
         var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));

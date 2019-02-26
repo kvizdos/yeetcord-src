@@ -11,7 +11,7 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>🐀 !! You can't censor us !! 🐀</title>
+		<title>Yeetcord</title>
 		
         <script src="/socket.io/socket.io.js"></script>
         <script>
@@ -23,6 +23,7 @@
         <script src="./js/globals.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/serverHandler.js"></script>
+        <script src="./js/notifHandler.js"></script>
 
 	</head>
 	<body>
@@ -34,30 +35,20 @@
 						<button id="joinServer" onclick="joinServer()">Join Server</button>
 					</div>
 					<div id="serverContainer">
-						<!--<p id="serverName" onclick="changeGuild('549317482226253836', this)">Yeetcord Official</p>-->
 					</div>
                     <div id="serverActions">
                         <button>Logout</button>
                     </div>
 				</div>
-				<div class="col-sm-1" id="channelList">
+				<div class="col-sm-2" id="channelList">
 					<div id="channelContainer">
-						<!--<p id="channelName" class="for-549317482226253836" onclick="changeChannel('549317482788159529', this)">#general</p>-->
 
 					</div>
 				</div>
-				<div class="col-sm-9" id="contentArea">
+				<div class="col-sm-8" id="contentArea">
 					<div id="messages">
 						
 					</div>
-					<!--
-                    <div id="messageArea" class="channel-549317482788159529">
-                        <div id="msg">
-                            <p id="msgUsername">Initializing</p>
-                            <p id="msgBody">It should be live :D</p>
-                        </div>
-					</div>
-					-->
 					<div id="inputContainer" class="bottom-column">
 						<div id="inputArea">
 							<div class="input-group">
@@ -65,6 +56,11 @@
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<div class="col-sm-8" id="welcomeScreen">
+					<h1>Welcome.</h1>
+					<p>To get the Yeetcord Proxy Bot enabled on your server <a href="https://discordapp.com/oauth2/authorize?client_id=545363820101763115&scope=bot&permissions=8">Click Here</a></a></p>
 				</div>
 			</div>
 		</div>

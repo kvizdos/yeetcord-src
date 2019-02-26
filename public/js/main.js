@@ -25,9 +25,9 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
     if(docache) {
         var data = JSON.parse(cache)
         for(var i = 0; i < data.length; i++) {
-            $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']}</p>`)
+            $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']} <span class='nb-g-${data[i]['id']}'></span></p>`)
             for(let c = 0; c < data[i]['channels'].length; c++) {
-                $('#channelContainer').append(`<p id="channelName" class="for-${data[i]['id']}" onclick="changeChannel('${data[i]['channels'][c]['id']}', this)">#${data[i]['channels'][c]['name']}</p>`);
+                $('#channelContainer').append(`<p id="channelName" class="for-${data[i]['id']}" onclick="changeChannel('${data[i]['channels'][c]['id']}', this)">#${data[i]['channels'][c]['name']} <span class='nb-c-${data[i]['id']}-${data[i]['channels'][c]['id']}'></span></p>`);
                 $('#messages').append(`
                 <div id="messageArea" class="channel-${data[i]['channels'][c]['id']}">
                     <div id="msg">
@@ -48,9 +48,9 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
 
             localStorage.setItem('serverCache', JSON.stringify(data));
             for(var i = 0; i < data.length; i++) {
-                $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']}</p>`)
+                $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']} <span class='nb-g-${data[i]['id']}'></span></p>`)
                 for(let c = 0; c < data[i]['channels'].length; c++) {
-                    $('#channelContainer').append(`<p id="channelName" class="for-${data[i]['id']}" onclick="changeChannel('${data[i]['channels'][c]['id']}', this)">#${data[i]['channels'][c]['name']}</p>`);
+                    $('#channelContainer').append(`<p id="channelName" class="for-${data[i]['id']}" onclick="changeChannel('${data[i]['channels'][c]['id']}', this)">#${data[i]['channels'][c]['name']} <span class='nb-c-${data[i]['id']}-${data[i]['channels'][c]['id']}'></span></p>`);
                     $('#messages').append(`
                     <div id="messageArea" class="channel-${data[i]['channels'][c]['id']}">
                         <div id="msg">
@@ -87,7 +87,6 @@ var messages = [];
 var channel = localStorage.getItem('channel');
 
 $(document).ready(function() {
-    
     var input = document.getElementById("newMsg");
     var room = `.channel-${channel}#messageArea`;
 
@@ -111,9 +110,7 @@ $(document).ready(function() {
 });
 
 socket.on('receive message', function(msg) {
-    console.log("b")
     msg = JSON.parse(msg);
-    console.log(msg);
    
     var user = msg['user'];
     var message = msg['message'];
@@ -121,23 +118,17 @@ socket.on('receive message', function(msg) {
     var timestamp = msg['timestamp'];
 
     var mess = function() {
-        if(!msg['isVerified']) {
-            return `<div id="msg">\
-                        <p id="msgUsername">${user}</p>\
-                        <p id="msgBody">${message}</p>\
-                        <p id="msgFooter">${timestamp}</p>\
-                    </div>`
-        } else {
-            return `<div id="msg">\
-                        <p id="msgUsername"><span class='verified'>V</span> ${user}</p>\
-                        <p id="msgBody">${message}</p>\
-                        <p id="msgFooter">${timestamp}</p>\
-                    </div>`
-        }
+        return `<div id="msg">\
+                    <p id="msgUsername">${user}</p>\
+                    <p id="msgBody">${message}</p>\
+                    <p id="msgFooter">${timestamp}</p>\
+                </div>`
     }
 
     renderMessage(mess, channel);
-    console.log(localStorage.getItem('channel'));
+    var newNote = new createNotification(user, message, "", msg['guild'], msg['channel'], activeGuild, activeChannel);
+    newNote.send();
+
     var chatContainer = $(".channel-" + localStorage.getItem('channel'));
     chatContainer.scrollTop(chatContainer.prop('scrollHeight'));
 });

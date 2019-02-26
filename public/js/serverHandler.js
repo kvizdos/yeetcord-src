@@ -1,3 +1,6 @@
+var activeChannel = "";
+var activeGuild = "";
+
 function changeChannel(id, element) {
     localStorage.setItem('channel', id);
     $('.activeChannel').removeClass('activeChannel');
@@ -5,10 +8,19 @@ function changeChannel(id, element) {
 
     $('[class^=channel-]').hide();
     $('.channel-' + id).show();
+
+    activeChannel = id;
+
+    deleteBadges(activeGuild, activeChannel);
 }
 
 function changeGuild(id, element) {
     socket.emit('change guild', id);
+
+    $('#contentArea').show();
+    $('#channelList').show();
+    $('#welcomeScreen').hide();
+
     $('[class^=channel-]').hide();
     $('.activeChannel').removeClass('activeChannel');
     $('[class^=for-]').hide();
@@ -19,6 +31,8 @@ function changeGuild(id, element) {
     $(element).addClass('active');
 
     $('.for-' + id).show();
+
+    activeGuild = id;
 }
 
 function joinServer() {
