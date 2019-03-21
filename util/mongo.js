@@ -76,7 +76,7 @@ async function userExists(user, password = undefined, login = false, salt = unde
                                         var newToken = new Token(user, token);
                                         tokenCache.push(newToken);
 
-                                        resolve({status: "user created", token: token, servers: ['yeet'], uid: uid, code: code});
+                                        resolve({status: "user created", token: token, servers: ['yeet'], serverIds: ["549317482226253836"], uid: uid, code: code});
                                         db.close();
 
                                     });
