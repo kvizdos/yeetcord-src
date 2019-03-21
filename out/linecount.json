@@ -672,6 +672,180 @@
                     "filename": "util\\security.js"
                 }
             ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-02-26 13:07:01",
+            "filesum": 27,
+            "codesum": 2075,
+            "commentsum": 39,
+            "blanksum": 245,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 21,
+                    "comment": 2,
+                    "filename": "build.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "discord\\config.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "discord\\servers.json"
+                },
+                {
+                    "blank": 23,
+                    "code": 74,
+                    "comment": 3,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 835,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\assets\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\assets\\notif.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "public\\css\\global.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "public\\css\\login.css"
+                },
+                {
+                    "blank": 41,
+                    "code": 179,
+                    "comment": 1,
+                    "filename": "public\\css\\main.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "public\\css\\verify.css"
+                },
+                {
+                    "blank": 13,
+                    "code": 64,
+                    "comment": 3,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "public\\js\\chathandler.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 93,
+                    "comment": 0,
+                    "filename": "public\\js\\globals.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 97,
+                    "comment": 0,
+                    "filename": "public\\js\\login.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 126,
+                    "comment": 6,
+                    "filename": "public\\js\\main.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "public\\js\\notifHandler.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "public\\js\\serverHandler.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 33,
+                    "comment": 1,
+                    "filename": "public\\js\\userHandler.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 33,
+                    "comment": 3,
+                    "filename": "public\\login.html"
+                },
+                {
+                    "blank": 8,
+                    "code": 19,
+                    "comment": 2,
+                    "filename": "public\\verify.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "routes\\middleware.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "routes\\router.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "routes\\user.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 169,
+                    "comment": 17,
+                    "filename": "util\\mongo.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "util\\security.js"
+                }
+            ]
         }
     ]
 }

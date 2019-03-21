@@ -15,8 +15,11 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 var mongo = require('./util/mongo');
+var handler = require('./util/handlers');
 
 var fs = require('fs');
+
+var _ServerHandler = new handler.ServerHandler(); 
 
 var activeChannels = [];
 
@@ -47,22 +50,15 @@ app.get('/verify', (req, res) => {
 app.post('/join', mw.isAuthenticated, function(req, res) {
     var username = req.body['username'];
     var id = req.body['id'];
-    var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
-
-    var server = activeServers.filter((g) => {
-        return g.ez == id
+    
+    _ServerHandler.join(id, username).then((resp) => {
+        if(resp['error'] == undefined) {
+            res.end(JSON.stringify(resp));
+        } else {
+            res.end(JSON.stringify(resp));
+        }
     });
-    if(server.length == 1) {
-        mongo.joinServer(username, id).then((resp) => {
-            if(resp) {
-                res.end(JSON.stringify({status: "success"}));
-            } else {
-                res.end(JSON.stringify({status: "fail", error: "already in"}));
-            }
-        })
-    } else {
-        res.end(JSON.stringify({status: "fail", error: "invalid code"}));
-    }
+
 });
 
 
@@ -83,10 +79,11 @@ function generateVerification(len = 8) {
 
 var tempUsers = [];
 // SOCKET SHIT
-var Guild = function(id, name, channels) {
+var Guild = function(id, name, channels, users) {
     this.id = id,
     this.name = name,
-    this.channels = channels
+    this.channels = channels,
+    this.users = users
 }
 
 
@@ -101,43 +98,64 @@ function escapeHtml(unsafe) {
 
  // Displayname cache
  var dnCache = [];
-
+var onlineUsers = [];
 io.on('connection', function(socket){
     tempUsers.push(socket.id);
     console.log('New User (#'+tempUsers.length+')');    
+
+    socket.on('go online', function(username, guild) {
+        io.to(guild).emit('new user', username, guild)
+
+    })
+    
     socket.on('disconnect', function(){
         console.log('user disconnected');
+        io.emit("user offline", )
         activeChannels.splice(tempUsers.indexOf(socket.id), 1);
         tempUsers.splice(tempUsers.indexOf(socket.id), 1);
     });
 
-    socket.on('update servers', function(servers, fn) {
+    socket.on('update servers', function(username, fn) {
         var guilds = [];
         var messages = [];
-        var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
-        servers = JSON.parse(servers);
-        
-        if(servers !== null) {
+        _ServerHandler.getServers(username).then((info) => {
+            var users = info['users'];
+            var servers = info['servers'];
             for(var i = 0; i < servers.length; i++) {
-                var server = activeServers.filter((s) => {
-                    return s['ez'] == servers[i]
-                });
-
-                socket.join(server[0]['id']);
+                socket.join(servers[i]);
                 var channels = [];
-                client.guilds.get(server[0]['id'])['channels'].forEach((c) => {
+                client.guilds.get(servers[i])['channels'].forEach((c) => {
                     if(c['type'] == 'text') {
                         channels.push({id: c['id'], name: c['name']})
                     }
                 })
 
-                var newGuild = new Guild(client.guilds.get(server[0]['id'])['id'], client.guilds.get(server[0]['id'])['name'], channels);
+                var newGuild = new Guild(client.guilds.get(servers[i])['id'], client.guilds.get(servers[i])['name'], channels, users);
                 guilds.push(newGuild);
-            }
-        }
 
-        fn(guilds);
+            }
+    
+            fn(guilds);
+        })
     });
+
+    socket.on('request history', function(info, fn) {
+        client.guilds.get(info['guild']).channels.get(info['channel']).fetchMessages({limit: 100}).then(msgs => {
+            var fancyMessages = msgs.map((m) => {
+                /*
+                if(m['author']['username'].indexOf('@') == 0) {
+                    a = a.split("*")[1];
+                    console.log(a);
+                    var uInfo = client.guilds.get(info['guild']).fetchMember(a.substr(2, a.length - 3));
+
+                }
+                */
+                return {author: m['author']['username'], content: m['content'], timestamp: m['createdTimestamp'], channel: info['channel'], us: m['author']['id'] };
+            })
+            
+            fn(fancyMessages);
+        })
+    })
 
 
     socket.on('send message', function(msgContent) {
@@ -237,51 +255,36 @@ client.on("ready", () => {
 });
   
 client.on("guildCreate", guild => {
+    
+    _ServerHandler.createServer("Someone", guild.id).then(resp => {
+        if(resp['status'] == "complete") {
+           
+            var genChat = client.guilds.get(guild.id)['channels'].filter((c) => {
+                return c.name == "general" && c.type == "text";
+            }).map((o) => {
+                return o.id
+            })
+            var ez = resp['ez'];
+            client.guilds.get(guild.id).channels.get(genChat[0]).send("Hello! I'm now activated, wahoo! To join this channel on Yeetcord, either enter the code: '"+ez+"' into the join area, or go to https://yeetcord.tk/join/" + ez + "! It is recommended to either pin this message or put it in somewhere easy to find, but you can always run `!yeetcord id` to get it back :D Enjoy!")
+
+        } else {
+
+        }
+    })
+    
     console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
-
-    var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
-
-    var exists = activeServers.filter((c) => {
-        return c['id'] == guild.id;
-    }).length == 1;
-
-    if(!exists) {
-        var ez = generateVerification(6);
-        var ezTaken = activeServers.filter((c) => {
-            return c['ez'] == ez;
-        }).length == 1;
-    
-        if(!ezTaken) {
-            activeServers.push({id: guild.id, ez: ez});
-        } else {
-            ez = generateVerification(7);
-            activeServers.push({id: guild.id, ez: ez});
-        }
-        
-        
-        var genChat = client.guilds.get(guild.id)['channels'].filter((c) => {
-            return c.name == "general" && c.type == "text";
-        }).map((o) => {
-            return o.id
-        })
-
-        client.guilds.get(guild.id).channels.get(genChat[0]).send("Hello! I'm now activated, wahoo! To join this channel on Yeetcord, either enter the code: '"+ez+"' into the join area, or go to https://yeetcord.tk/join/" + ez + "! It is recommended to either pin this message or put it in somewhere easy to find, but you can always run `!yeetcord id` to get it back :D Enjoy!")
-
-        fs.writeFile('./discord/servers.json', JSON.stringify(activeServers), 'utf8');    
-    }
-    
 });
   
 client.on("guildDelete", guild => {
-    console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
-    var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
-    activeServers = activeServers.filter((g) => {
-        return guild.id !== g.id
-    });
-
-    fs.writeFile('./discord/servers.json', JSON.stringify(activeServers), 'utf8');    
+    _ServerHandler.leaveServer(guild.id).then(resp => {
+        if(resp['status'] == "complete") {
+            console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+        } else {
+            console.log("FAILED TO REMOVE GUILD: " + guild.id);
+        }
+    }) 
 
 });
 
@@ -292,44 +295,46 @@ client.on('message', async message => {
 
     var commandStr = message.content.split(" ");
 
-    console.log(message.author.toString() + " " + message.author.nickname + " " + message);
-
     if(commandStr[0] == prefix) {
-        var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
+        /*var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
 
         var server = activeServers.filter((g) => {
             return g.id == message.guild.id
         });
+        */
 
-        if(commandStr.length == 1) {
-            message.reply("Hello! The ID of this server is: `" + server[0]['ez'] + "`\nTo verify your account, please type: `!yeetcord verify <uid/tag> <verification code> <username>`\nCan't find the code? If it's not above the 'Logout' button on Yeetcord, you're already verified!")
-        } else {
-            switch(commandStr[1]) {
-                case "verify":
-                    if(message.guild.id == "549317482226253836") {
-                    if(commandStr[4] !== undefined) {
-                            message.reply("Please hold a moment while I verify you...");
-                            mongo.verifyUser(commandStr[2], commandStr[3], message.author.toString(), commandStr[4]).then((resp) => {
-                                if(resp) {
-                                    message.reply("You're all set! Enjoy verification :D (Note: You will now need to relogin)");
+        _ServerHandler.doesExist(message.guild.id).then((resp) => {
+            var server = resp['id'];
+            if(commandStr.length == 1) {
+                message.reply("Hello! The ID of this server is: `" + server[0]['ez'] + "`\nTo verify your account, please type: `!yeetcord verify <uid/tag> <verification code> <username>`\nCan't find the code? If it's not above the 'Logout' button on Yeetcord, you're already verified!")
+            } else {
+                switch(commandStr[1]) {
+                    case "verify":
+                        if(message.guild.id == "549317482226253836") {
+                        if(commandStr[4] !== undefined) {
+                                message.reply("Please hold a moment while I verify you...");
+                                mongo.verifyUser(commandStr[2], commandStr[3], message.author.toString(), commandStr[4]).then((resp) => {
+                                    if(resp) {
+                                        message.reply("You're all set! Enjoy verification :D (Note: You will now need to relogin)");
 
-                                    var role = message.guild.roles.find(role => role.name === "Verified User");
-                                    message.member.addRole(role);
+                                        var role = message.guild.roles.find(role => role.name === "Verified User");
+                                        message.member.addRole(role);
 
-                                } else {
-                                    message.reply("Hmm, that code didn't work.")
-                                }
-                            })
+                                    } else {
+                                        message.reply("Hmm, that code didn't work.")
+                                    }
+                                })
+                            } else {
+                                message.reply("Please send you're tag, verifiation code, and username along!")
+                            }
                         } else {
-                            message.reply("Please send you're tag, verifiation code, and username along!")
+                            message.reply("You must be in the Official Yeetcord Central Server. I've PM'd you the join code!");
+                            message.author.send("Hello! To verify your account, please join this server https://discord.gg/Nd2RqCz")
                         }
-                    } else {
-                        message.reply("You must be in the Official Yeetcord Central Server. I've PM'd you the join code!");
-                        message.author.send("Hello! To verify your account, please join this server https://discord.gg/Nd2RqCz")
-                    }
-                    break;
+                        break;
+                }
             }
-        }
+        })
     } else {
         var newMsg = new Message(message.author.username, message.content, message.createdTimestamp, true, message.guild.id, message.channel.id, message.id);
 
@@ -343,8 +348,9 @@ client.on('message', async message => {
 
 
 // AUTHORIZATION SECTION
+/*
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('549404374426976267').send("Welcome! To verify your account, please type: `!yeetcord verify <uid/tag> <verification code> <username>`. If you don't have a Yeetcord account yet, you need one @ yeetcord.tk"); 
 });
-  
+  */
 client.login(discordConf.token);

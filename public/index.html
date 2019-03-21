@@ -20,11 +20,19 @@
 		<link rel="stylesheet" href="./css/main.css">
 		<link rel="stylesheet" href="./css/global.css">
 
-        <script src="./js/globals.js"></script>
-        <script src="./js/main.js"></script>
-        <script src="./js/serverHandler.js"></script>
-        <script src="./js/notifHandler.js"></script>
+		<script src="./js/globals.js"></script>
+		<script src="./js/tagHandler.js"></script>
 
+		<script src="./js/notifHandler.js"></script>
+        <script src="./js/serverHandler.js"></script>
+		<script src="./js/userHandler.js"></script>
+		<script src="./js/chathandler.js"></script>
+
+		<script src="./js/changelogHandler.js"></script>
+
+		<script src="./js/loadHandler.js"></script>
+
+		<script src="./js/main.js"></script>
 	</head>
 	<body>
 		<div class="container-fluid" id="msgArea">
@@ -37,7 +45,7 @@
 					<div id="serverContainer">
 					</div>
                     <div id="serverActions">
-                        <button>Logout</button>
+                        <button onclick="logout()">Logout</button>
                     </div>
 				</div>
 				<div class="col-sm-2" id="channelList">
@@ -45,11 +53,12 @@
 
 					</div>
 				</div>
-				<div class="col-sm-8" id="contentArea">
+				<div class="col-sm-7" id="contentArea">
 					<div id="messages">
 						
 					</div>
 					<div id="inputContainer" class="bottom-column">
+						<div id="tagList"></div>
 						<div id="inputArea">
 							<div class="input-group">
 								<input class="form-control" placeholder="Message" id="newMsg"></input>
@@ -58,9 +67,26 @@
 					</div>
 				</div>
 
+
+				<div id="userListContainer"></div>
+
 				<div class="col-sm-8" id="welcomeScreen">
 					<h1>Welcome.</h1>
 					<p>To get the Yeetcord Proxy Bot enabled on your server <a href="https://discordapp.com/oauth2/authorize?client_id=545363820101763115&scope=bot&permissions=8">Click Here</a></a></p>
+					<h2>Version History</h2>
+					<div id="updatesContainer">
+
+					</div>
+					<!--<div id="updateContainer">
+						<h3>Hello!</h3>
+						<p>Update body here</p>
+						<strong>Changelog:</strong>
+						<ul>
+							<li>Update item 1</li>
+						</ul>
+						<hr>
+					</div>
+				-->
 				</div>
 			</div>
 		</div>

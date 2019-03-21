@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Update: We're now in Beta V1.0! Invite your friends :D",
+        "desc": "Lots have been added this time, and there is still more to come! Below is a changelog",
+        "changelog": [
+            "We no longer @ you when you talk (finally)",
+            "We now have notifications! If you would like push notificiations, please allow them!",
+            "No longer get lost when you joined conversations, chat history is here (loads last 100 messages)!",
+            "The logout button finally works (woot woot)",
+            "See online users with the new Users Tab!",
+            "@%%you%% hey, tagging users are now a thing!"
+        ]
+    }
+]

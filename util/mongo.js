@@ -131,10 +131,8 @@ async function confirmToken(user, token, disableCache = false) {
         }).length == 1;
 
         if(tokenExists && !disableCache) {
-            console.log("Skipping cache!");
             resolve(true);
         } else {
-            console.log("Checking cache")
             MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
                 if (err) throw err;
                 var dbo = db.db("linkr");
@@ -201,7 +199,5 @@ async function verifyUser(uid, code, us, username) {
         });
     });
 }
-
-
 
 module.exports = { userExists, updateToken, confirmToken, joinServer, verifyUser }

@@ -29,7 +29,7 @@ function Message(user, message, timestamp, isVerified = false, guild, channel, i
     this.id = id;
     this.user = user,
     this.message = message,
-    this.timestamp = timestamp,
+    this.timestamp = new Date(timestamp),
     this.edited = false,
     this.isVerified = isVerified,
     this.channel = channel,
@@ -64,6 +64,22 @@ function Message(user, message, timestamp, isVerified = false, guild, channel, i
                     </div>`
         }
     }  
+}
+
+var Timestamp = function(time) {
+    this.time = new Date(time),
+    this.hours = this.time.getHours(),
+    this.minutes = this.time.getMinutes(),
+    this.ampm = this.hours >= 12 ? "PM" : "AM",
+    this.toString = function() {
+        var currHours = 0;
+        if(this.ampm == "PM") {
+            currHours = this.hours - 12;
+        } else {
+            currHours = this.hours;
+        }
+        return `${currHours}:${this.minutes} ${this.ampm}`
+    }
 }
 
 function getCookie(cname) {

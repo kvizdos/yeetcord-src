@@ -161,3 +161,42 @@ routes\user.js, code is 39, comment is 0, blank is 8.
 util\mongo.js, code is 167, comment is 17, blank is 21.
 util\security.js, code is 14, comment is 0, blank is 6.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-02-26 13:07:01
+count workspace : e:\Kenton Vizdos\Documents\Yeetcord
+total files : 27
+total code lines : 2075
+total comment lines : 39
+total blank lines : 245
+
+build.js, code is 21, comment is 2, blank is 6.
+discord\config.json, code is 4, comment is 0, blank is 0.
+discord\servers.json, code is 1, comment is 0, blank is 0.
+index.js, code is 74, comment is 3, blank is 23.
+package-lock.json, code is 835, comment is 0, blank is 0.
+package.json, code is 19, comment is 0, blank is 0.
+public\assets\logo.png, it is a binary file.
+public\assets\notif.png, it is a binary file.
+public\css\global.css, code is 23, comment is 0, blank is 3.
+public\css\login.css, code is 42, comment is 0, blank is 4.
+public\css\main.css, code is 179, comment is 1, blank is 41.
+public\css\verify.css, code is 19, comment is 0, blank is 5.
+public\index.html, code is 64, comment is 3, blank is 13.
+public\js\chathandler.js, code is 27, comment is 0, blank is 3.
+public\js\globals.js, code is 93, comment is 0, blank is 6.
+public\js\login.js, code is 97, comment is 0, blank is 16.
+public\js\main.js, code is 126, comment is 6, blank is 26.
+public\js\notifHandler.js, code is 52, comment is 0, blank is 11.
+public\js\serverHandler.js, code is 66, comment is 0, blank is 19.
+public\js\userHandler.js, code is 33, comment is 1, blank is 10.
+public\login.html, code is 33, comment is 3, blank is 7.
+public\verify.html, code is 19, comment is 2, blank is 8.
+routes\middleware.js, code is 18, comment is 0, blank is 4.
+routes\router.js, code is 8, comment is 1, blank is 5.
+routes\user.js, code is 39, comment is 0, blank is 8.
+util\mongo.js, code is 169, comment is 17, blank is 21.
+util\security.js, code is 14, comment is 0, blank is 6.
+===============================================================================

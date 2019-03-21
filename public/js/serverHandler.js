@@ -11,15 +11,27 @@ function changeChannel(id, element) {
 
     activeChannel = id;
 
-    deleteBadges(activeGuild, activeChannel);
-}
+    getHistory();
 
+    deleteBadges(localStorage.getItem('guild'), localStorage.getItem('channel'));
+}
+var alreadyOnline = [];
 function changeGuild(id, element) {
     socket.emit('change guild', id);
+    
+    if(!alreadyOnline.includes(id)) {
+        socket.emit('go online', JSON.parse(localStorage.getItem('auth'))['username'], id);
+        alreadyOnline.push(id);
+    } else {
+        renderUsers(id);
+    }
 
     $('#contentArea').show();
     $('#channelList').show();
     $('#welcomeScreen').hide();
+    $('#userList').hide();
+
+    $('.userList-' + id).show();
 
     $('[class^=channel-]').hide();
     $('.activeChannel').removeClass('activeChannel');
@@ -38,7 +50,6 @@ function changeGuild(id, element) {
 function joinServer() {
     var id = $("#joinId").val();
     var btn = $('#joinServer');
-    
     $('#joinId').val('');
 
     if(id !== '') {
@@ -52,7 +63,7 @@ function joinServer() {
         req.send(req.post).then((resp) => {
             resp = JSON.parse(resp);
 
-            if(resp['status'] == "success") {
+            if(resp['status'] == "complete") {
                 var servers = JSON.parse(localStorage.getItem('servers')) !== null ? JSON.parse(localStorage.getItem('servers')) : [];
                 servers.push(id);
                 localStorage.setItem('servers', JSON.stringify(servers));
@@ -61,7 +72,7 @@ function joinServer() {
 
                 updateServers(false);
             } else {
-                alert("Invalid join code!");
+                alert(resp['error']);
                 btn.removeClass('waiting');
                 btn.removeAttr('disabled');
             }
@@ -72,8 +83,6 @@ function joinServer() {
 function sendMessage(mes) {
     var username = getCookie('username');
     var message = mes;
-    var msg = new Message(username, message, "100", JSON.parse(localStorage.getItem('auth'))['verified'], localStorage.getItem('guild'), localStorage.getItem('channel'), generateVerification(), getCookie('token'), JSON.parse(localStorage.getItem('auth'))['us']);
-    console.log("Yeeting the message");
-    console.log(message);
+    var msg = new Message(username, message, (new Date).getTime(), JSON.parse(localStorage.getItem('auth'))['verified'], localStorage.getItem('guild'), localStorage.getItem('channel'), generateVerification(), getCookie('token'), JSON.parse(localStorage.getItem('auth'))['us']);
     socket.emit('send message', JSON.stringify(msg));
 }

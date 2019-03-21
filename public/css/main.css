@@ -117,6 +117,7 @@ body {
 
 #inputArea {
     width: 100%;
+    padding: 15px;
 }
 
 #inputArea .input-group {
@@ -128,10 +129,9 @@ body {
     bottom: 0;
 }
 
-#inputContainer {
+#inputContainer:not(#tagList) {
     width: 100%;
     margin: 0;
-    padding: 15px;
     background-color: #2a77e9;
 }
 
@@ -153,9 +153,9 @@ input {
 }
 
 #msg {
-    margin: 10px;
+    padding: 5px;
     overflow: hidden;
-    border-bottom: 1.5px solid #376ab8;
+    border-top: 1.5px solid #376ab8;
     font-size: 14pt;
 }
 
@@ -190,6 +190,18 @@ input {
     display: none;
 }
 
+#userList {
+    background-color: #134da5;
+    height: 100%;
+    color: white;
+}
+
+#userList p {
+    text-align: center;
+    padding: 5px;
+    font-size: 14pt;
+}
+
 [class^='nb-g-'] {
     float: right;
     content: "5";
@@ -206,4 +218,32 @@ input {
     background-color: #326eca;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+#updatesContainer:not(h1) {
+    font-size: 14pt;
+}
+
+#tagList {
+    padding: 3px;
+    background-color: #326eca;
+    display: none;
+}
+
+#tagList p {
+    padding: 5px;
+    font-size: 12pt;
+    color: white;
+    display: inline;
+    border-right: 2px solid #2170e7;
+}
+
+.tagged {
+    background-color: #afdeff !important;
+}
+
+.msgNoBorder {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    border: 0 !important;
 }
