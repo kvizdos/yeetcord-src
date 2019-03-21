@@ -65,7 +65,7 @@ async function userExists(user, password = undefined, login = false, salt = unde
                                user.indexOf('|') == -1) {
                                 var token = security.salt(64);
                                 var uid = security.salt(8);
-                                dbo.collection("users").insertOne({uid: uid, username: user, password: password, salt: salt, token: token, servers: ["yeet"]}, function(err, res) {
+                                dbo.collection("users").insertOne({uid: uid, username: user, password: password, salt: salt, token: token, servers: ["yeet"], serverIds: ["549317482226253836"]}, function(err, res) {
                                     if (err) throw err;
                                     var code = security.salt(6);
                                     dbo.collection('codes').insertOne({uid: uid, code: code}, function(err, resp) {
