@@ -1,6 +1,7 @@
 var auth = JSON.parse(localStorage.getItem('auth'));
-
-
+var _Modal = new Modal('#modalOne');
+var _ModalImg = new ImageModal('#imgModal');
+var Emoji = new Emoji();
 
 if(auth == null) {
     alert("Username/token mismatch! Please relogin!");
@@ -36,7 +37,10 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
         if(docache) {
             var data = JSON.parse(cache)
             for(var i = 0; i < data.length; i++) {
-                $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']} <span class='nb-g-${data[i]['id']}'></span></p>`)
+                var shortName = data[i]['name'];
+                shortName = shortName.match(/\b(\w)/g);
+                shortName = shortName.join("");
+                $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${shortName} <span class='nb-g-${data[i]['id']}'></span></p>`)
                 
                 console.log($('#userListContainer').children());
                 console.log("Adding server: " + data[i]['id']);
@@ -67,7 +71,11 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
     
                 localStorage.setItem('serverCache', JSON.stringify(data));
                 for(var i = 0; i < data.length; i++) {
-                    $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${data[i]['name']} <span class='nb-g-${data[i]['id']}'></span></p>`)
+                    var shortName = data[i]['name'];
+                    shortName = shortName.match(/\b(\w)/g);
+                    shortName = shortName.join("");
+                    shortName = shortName.toUpperCase();
+                    $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${shortName} <span class='nb-g-${data[i]['id']}'></span></p>`)
                     
                     $('#userListContainer').append(`
                     <div class="col-sm-1 userList-${data[i]['id']}" id="userList">
@@ -86,6 +94,9 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
                         `);
                     }
                 }
+
+                $('#serverContainer').append(`<div id="hr"></div><p id="serverName" onclick="joinGuild()">Join</p>`)
+
             })
         }
 }
@@ -117,6 +128,8 @@ $(document).ready(function() {
     $('[class^=userList-]').hide();
 
     loadItems();
+    _Modal.register();
+    _ModalImg.register();
 
     $(room).show();
     
@@ -125,7 +138,15 @@ $(document).ready(function() {
       // Cancel the default action, if needed
       var newMess = $('#newMsg').val();
 
-      findTag(newMess.split(" ").slice(-1)[0], "#tagList")
+      findTag(newMess.split(" ").slice(-1)[0], "#tagList");
+
+      var m = newMess.split(" ").slice(-1)[0];
+      if(m.startsWith(":")) {
+        if(m.endsWith(":")) m = newMess.split(" ").slice(-1)[0].substr(0, m.length - 1);
+        Emoji.search(m.slice(1), "#emojiList");
+      } else {
+          $("#emojiList").hide(100);
+        }
 
       event.preventDefault();
       // Number 13 is the "Enter" key on the keyboard
@@ -133,9 +154,17 @@ $(document).ready(function() {
         // Trigger the button element with a click
     
         if(mismatchCheck(username, token) && newMess !== '') {
-            $('#newMsg').val("");
-            sendMessage(newMess);
-            $('#tagList').hide(100);
+            $("#emojiList").hide(100);
+
+            if(newMess.length < 2000) {
+                $('#newMsg').val("");
+                sendMessage(newMess);
+                $('#tagList').hide(100);
+            } else {
+                _Modal.header = "Uh oh!";
+                _Modal.text = "That message is too long!";
+                _Modal.show();
+            }
             //            socket.emit('send message', JSON.stringify({user: username, token: token, msg: newMess, channel: channel}));
         }
       }
@@ -148,16 +177,24 @@ socket.on('receive message', function(msg) {
     var user = msg['user'];
     var message = msg['message'];
     var channel = msg['channel'];
-    
+    var attachments = msg['attachments'];
+
     var timestamp = new Timestamp(new Date(msg['timestamp'])).toString();
 
     var tagged = ifTagged(message);
 
     // COMPARE $.parseHTML($('.channel-' + channel).children().last().html())[1].innerText
 
-    console.log(message);
+    message = RichChat(message);
 
     var mess = function() {
+
+        if(attachments !== undefined && attachments.length > 0) {
+            if(message.length > 0) message += "<br/>";
+            for(var i = 0; i < attachments.length; i++) {
+                message += `<img id="chatImg" onclick='viewImg("${attachments[i]}")' src='${attachments[i]}' width=250 />`;
+            }
+        }
 
         if($('.channel-' + channel).children().last()[0].className.indexOf(user) == -1) {
             if(!tagged) {
@@ -170,9 +207,9 @@ socket.on('receive message', function(msg) {
                 var notification = new createNotification(user, message, "", '', '', '', '')
                 notification.ping();
 
-                return `<div id="msg" class='tagged ${user}'>\
+                return `<div id="msg" class='${user}'>\
                             <p id="msgUsername">${user}</p>\
-                            <p id="msgBody">${message}</p>\
+                            <p id="msgBody" class="tagged">${message}</p>\
                             <p id="msgFooter">${timestamp}</p>\
                         </div>`
             }
@@ -193,8 +230,8 @@ socket.on('receive message', function(msg) {
                 var notification = new createNotification(user, message, "", '', '', '', '')
                 notification.ping();
 
-                return `<div id="msg" class='tagged msgNoBorder ${user}'>\
-                            <p id="msgBody">${message}</p>\
+                return `<div id="msg" class='msgNoBorder ${user}'>\
+                            <p id="msgBody" class="tagged">${message}</p>\
                             <p id="msgFooter">${timestamp}</p>\
                         </div>`
             }
@@ -246,4 +283,14 @@ function logout() {
     localStorage.clear();
 
     window.location.href = "/";
+}
+
+function joinGuild() {
+    _Modal.header = "Join a guild";
+    _Modal.text = "Please input the guild id below.";
+    _Modal.showActions(1, "ID Here", "Join", joinServer);
+}
+
+function viewImg(img) {
+    _ModalImg.show(img);
 }

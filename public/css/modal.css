@@ -1,0 +1,79 @@
+#modalHider {
+    display: none;
+}
+
+#modalContainer {
+    z-index: 10;
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#modalBackground {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    position: absolute;
+}
+
+#modal {
+    width: 25%;
+    background-color: #383838;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 250ms;
+    animation: shake .25s; 
+}
+
+#modalHeader {
+    padding: 8px;
+    margin: 0;
+    text-align: center;
+    background-color: rgb(15, 15, 15);
+    color: white;
+}
+
+#modalText {
+    text-align: center;
+    padding: 12px;
+    margin: 0;
+    font-size: 16pt;
+}
+
+#modalActions {
+    display: none;
+    text-align: center;
+}
+
+#modalActions input {
+    padding: 10px;
+    margin: 15px;
+    margin-top: 0;
+}
+
+#modalActions button {
+    border-radius: 5px;
+    background-color: rgb(15, 15, 15);
+    border: 0;
+    padding: 8px;
+}
+
+@keyframes shake {
+  0% {transform: translate(1px, 1px) rotate(0deg) scale(0); }
+  20% {transform: translate(-1px, -1px) rotate(0deg) scale(1); }
+  25% { transform: translate(-1px, -1px) rotate(5deg); }
+  50% { transform: translate(1px, 1px) rotate(0deg); }
+  75% { transform: translate(-1px, -1px) rotate(-5deg); }
+  100% { transform: translate(1px, 1px) rotate(0deg); }
+}
+
+@media only screen and (max-width: 600px) {
+  #modal {
+    width: 75%;
+  }
+}

@@ -20,6 +20,7 @@ var handler = require('./util/handlers');
 var fs = require('fs');
 
 var _ServerHandler = new handler.ServerHandler(); 
+var _Logger = new handler.LogHandler();
 
 var activeChannels = [];
 
@@ -29,7 +30,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+    _Logger.success('listening on *:3000');
 });
 
 app.use('/css', express.static(path.join(__dirname, 'public/css')))
@@ -101,7 +102,7 @@ function escapeHtml(unsafe) {
 var onlineUsers = [];
 io.on('connection', function(socket){
     tempUsers.push(socket.id);
-    console.log('New User (#'+tempUsers.length+')');    
+    _Logger.warn('New User Connected (#'+tempUsers.length+')');    
 
     socket.on('go online', function(username, guild) {
         io.to(guild).emit('new user', username, guild)
@@ -109,7 +110,6 @@ io.on('connection', function(socket){
     })
     
     socket.on('disconnect', function(){
-        console.log('user disconnected');
         io.emit("user offline", )
         activeChannels.splice(tempUsers.indexOf(socket.id), 1);
         tempUsers.splice(tempUsers.indexOf(socket.id), 1);
@@ -142,15 +142,13 @@ io.on('connection', function(socket){
     socket.on('request history', function(info, fn) {
         client.guilds.get(info['guild']).channels.get(info['channel']).fetchMessages({limit: 100}).then(msgs => {
             var fancyMessages = msgs.map((m) => {
-                /*
-                if(m['author']['username'].indexOf('@') == 0) {
-                    a = a.split("*")[1];
-                    console.log(a);
-                    var uInfo = client.guilds.get(info['guild']).fetchMember(a.substr(2, a.length - 3));
-
+                var atts = [];
+                if (m.attachments.size > 0) {
+                    m.attachments.every((i) => {
+                        atts.push(i.url);
+                    });
                 }
-                */
-                return {author: m['author']['username'], content: m['content'], timestamp: m['createdTimestamp'], channel: info['channel'], us: m['author']['id'] };
+                return {author: m['author']['username'], content: m['content'], timestamp: m['createdTimestamp'], channel: info['channel'], us: m['author']['id'], attachments: atts };
             })
             
             fn(fancyMessages);
@@ -208,7 +206,7 @@ io.on('connection', function(socket){
 });
 
 // CONSTRUCTOR SHIT
-function Message(user, message, timestamp, isVerified = false, guild, channel, id = generateVerification(8)) {
+function Message(user, message, timestamp, isVerified = false, guild, channel, id = generateVerification(8), attachments = {}) {
     this.id = id;
     this.user = user,
     this.message = message,
@@ -217,6 +215,7 @@ function Message(user, message, timestamp, isVerified = false, guild, channel, i
     this.isVerified = isVerified,
     this.channel = channel,
     this.guild = guild,
+    this.attachments = attachments,
     this.getGuild = function() {
         return this.guild
     },
@@ -230,19 +229,11 @@ function Message(user, message, timestamp, isVerified = false, guild, channel, i
         this.edited = true;
     },
     this.toString = function() { 
-        if(!isVerified) {
-            return `<div id="msg">\
-                        <p id="msgUsername">${this.user}</p>\
-                        <p id="msgBody">${this.message}</p>\
-                        <p id="msgFooter">${this.timestamp}</p>\
-                    </div>`
-        } else {
-            return `<div id="msg">\
-                        <p id="msgUsername"><span class='verified'>V</span> ${this.user}</p>\
-                        <p id="msgBody">${this.message}</p>\
-                        <p id="msgFooter">${this.timestamp}</p>\
-                    </div>`
-        }
+        return `<div id="msg">\
+                    <p id="msgUsername"><span class='verified'>V</span> ${this.user}</p>\
+                    <p id="msgBody">${this.message}</p>\
+                    <p id="msgFooter">${this.timestamp}</p>\
+                </div>`
     }  
 }
 
@@ -250,7 +241,7 @@ function Message(user, message, timestamp, isVerified = false, guild, channel, i
 var discordConf = require('./discord/config');
 
 client.on("ready", () => {
-    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
+    _Logger.success(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
   
@@ -272,7 +263,7 @@ client.on("guildCreate", guild => {
         }
     })
     
-    console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+    _Logger.success(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
   
@@ -280,9 +271,9 @@ client.on("guildDelete", guild => {
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
     _ServerHandler.leaveServer(guild.id).then(resp => {
         if(resp['status'] == "complete") {
-            console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+            _Logger.danger(`I have been removed from: ${guild.name} (id: ${guild.id})`);
         } else {
-            console.log("FAILED TO REMOVE GUILD: " + guild.id);
+            _Logger.danger("FAILED TO REMOVE GUILD: " + guild.id);
         }
     }) 
 
@@ -296,13 +287,6 @@ client.on('message', async message => {
     var commandStr = message.content.split(" ");
 
     if(commandStr[0] == prefix) {
-        /*var activeServers = JSON.parse(fs.readFileSync('./discord/servers.json', 'utf8'));
-
-        var server = activeServers.filter((g) => {
-            return g.id == message.guild.id
-        });
-        */
-
         _ServerHandler.doesExist(message.guild.id).then((resp) => {
             var server = resp['id'];
             if(commandStr.length == 1) {
@@ -336,8 +320,17 @@ client.on('message', async message => {
             }
         })
     } else {
-        var newMsg = new Message(message.author.username, message.content, message.createdTimestamp, true, message.guild.id, message.channel.id, message.id);
+        var atts = [];
+        if (message.attachments.size > 0) {
+            message.attachments.every((i) => {
+                atts.push(i.url);
+            });
+        }
 
+        console.log(atts);
+        var newMsg = new Message(message.author.username, message.content, message.createdTimestamp, true, message.guild.id, message.channel.id, message.id, atts);
+
+        console.log(message.attachments.size > 0);
         newMsg.message = escapeHtml(newMsg.message);
         
         io.to(newMsg.guild).emit('receive message', JSON.stringify(newMsg));

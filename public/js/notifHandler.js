@@ -42,15 +42,15 @@ var createNotification = function(username, body, guildName, guild, channel, act
     this.activeChannel = activeChannel,
     this.ping = function() {
         if(noteForTag) {
-            this.pingStatus = new Notification(this.username + " ("+this.guildName+")", { body: this.body, icon: "/assets/notif.png" });
-            setTimeout(this.pingStatus.close.bind(this.status), 4000);
+            //this.pingStatus = new Notification(this.username + " ("+this.guildName+")", { body: this.body, icon: "/assets/notif.png" });
+            //setTimeout(this.pingStatus.close.bind(this.status), 4000);
         }
     },
     this.send = function(nopush = false) {
 
             if(document.hidden && notesAllowed) {
-                this.status = new Notification(this.username + " ("+this.guildName+")", { body: this.body, icon: "/assets/notif.png" });
-                setTimeout(this.status.close.bind(this.status), 4000);
+                //this.status = new Notification(this.username + " ("+this.guildName+")", { body: this.body, icon: "/assets/notif.png" });
+                //setTimeout(this.status.close.bind(this.status), 4000);
             }
                 var count = !isNaN(parseInt($('.nb-g-' + this.guild).html())) ? parseInt($('.nb-g-' + this.guild).html()) : 0;
                 var channelCount = !isNaN(parseInt($('.nb-c-' + this.guild + "-" + this.channel).html())) ? parseInt($('.nb-c-' + this.guild + "-" + this.channel).html()) : 0;

@@ -1,3 +1,28 @@
+*:focus {
+    outline: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #6e6e6e; 
+  border: 3px solid #424242;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 #alert {
     background-color: lightgray;
     border: 2px solid gray;
@@ -23,4 +48,21 @@
 
 button.waiting {
     background-color: #40649b !important;
+}
+
+#hr {
+    margin: 10px;
+}
+
+#hr::after {
+    display: table;
+    overflow: hidden;
+    height: 0px;
+    line-height: 0px;
+    content: '_';
+    border-radius: 2px;
+    color: transparent;
+    width: 50%;
+    margin: 0 auto;
+    background-color: rgb(15, 15, 15);
 }

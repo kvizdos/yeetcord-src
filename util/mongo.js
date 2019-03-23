@@ -5,6 +5,9 @@ var security = require('./security');
 
 var tokenCache = [];
 
+var handler = require('./handlers');
+var _Logger = new handler.LogHandler();
+
 var defaultServer = "tsqjaq";
 
 var Token = function(user, token) {
@@ -71,7 +74,7 @@ async function userExists(user, password = undefined, login = false, salt = unde
                                     dbo.collection('codes').insertOne({uid: uid, code: code}, function(err, resp) {
                                         if(err) throw err;
 
-                                        console.log("Created User!");
+                                        _Logger.success("Created User!");
     
                                         var newToken = new Token(user, token);
                                         tokenCache.push(newToken);
@@ -177,9 +180,6 @@ async function verifyUser(uid, code, us, username) {
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
             if (err) throw err;
             var dbo = db.db("linkr");
-            console.log(code);
-            console.log(uid);
-            console.log(us);
             dbo.collection("codes").findOne({code: code}, function(err, result) {
                 if(result !== null) {
                     dbo.collection("users").updateOne({uid: uid}, { $set: {verified: true, userString: us } }, function(err, result) {

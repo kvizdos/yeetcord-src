@@ -3,10 +3,34 @@ var url = "mongodb://localhost:27017/";
 
 const Security = require('./security');
 
+var loggerCount = 0;
+var LogHandler = function() {
+    this.log = function(msg) {
+        console.log(msg);
+    },
+    this.update = function(msg) {
+        console.log('\033[36m' +  msg + "\x1b[0m");
+    },
+    this.success = function(msg) {
+        console.log("\x1b[32m" +  msg + "\x1b[0m");
+    },
+    this.warn = function(msg) {
+        console.log("\x1b[33m" + msg + "\x1b[0m");
+    },
+    this.danger = function(msg) {
+        console.log("\x1b[31m" + msg + "\x1b[0m");
+    },
+    loggerCount++;
+    this.update("Logger ("+loggerCount+") Initialized")
+}
+
+var _Logger = new LogHandler();
+
 // Server Handler
 var ServerHandler = function() {
     this.db,
-    console.log("Initializing Server Handler"),
+    _Logger.update("Initializing Server Handler"),
+
     this.registerMongoConnection = function() {
         return MongoClient.connect(url, { useNewUrlParser: true });
     },
@@ -22,7 +46,8 @@ var ServerHandler = function() {
 
                                 dbo.collection("servers").insertOne({id: id, ez: ez, owner: owner, users: [], admins: []}, (err, res) => {
                                     if(err) {
-                                        console.log(err);
+
+                                        _Logger.danger(err);
                                         resolve({status: "fail", error: "database"});
                                     }
 
@@ -49,7 +74,7 @@ var ServerHandler = function() {
 
                         dbo.collection("servers").removeOne({id: id}, (err, res) => {
                             if(err) {
-                                console.log(err);
+                                _Logger.danger(err);
                                 resolve({status: "fail", error: "database"});
                             }
 
@@ -69,7 +94,7 @@ var ServerHandler = function() {
                 var dbo = db.db("linkr");
                 dbo.collection("servers").findOne(findScheme, function(err, result) {
                     if(err) {
-                        console.error(err);
+                        _Logger.danger(err);
                         reject("DB Issue!");
                     }
                     resolve(result !== null ? {id: result['id']} : {id: false});
@@ -120,7 +145,7 @@ var ServerHandler = function() {
 
                 dbo.collection("users").findOne({username: username}, (err, result) => {
                     if(err) {
-                        console.log("We've run into an issue");
+                        _Logger.danger("We've run into an issue");
                         console.error(err);
                         resolve({status: "fail", error: "database"});
                     }
@@ -145,4 +170,8 @@ var ServerHandler = function() {
     }
 }
 
-module.exports = { ServerHandler }
+var RichTextHandler = function() {
+    _Logger.update("Initializing Rich Text Handler");
+}
+
+module.exports = { ServerHandler, LogHandler }

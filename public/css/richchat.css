@@ -1,0 +1,73 @@
+.txt-bold {
+    font-weight: bold;
+}
+
+.txt-italic {
+    font-style: italic;
+}
+
+.txt-strike {
+    text-decoration: line-through;
+}
+
+.txt-underline {
+    text-decoration: underline;
+}
+
+.txt-spoiler {
+    content: "";
+    background-color: rgb(55, 55, 55);
+    padding: 0;
+    padding-right: 6px;
+    padding-left: 6px;
+    border-radius: 6px;
+    width: calc(100% + 5px);
+    text-align: center;
+}
+
+.txt-spoiler-container {
+    position: relative;
+}
+
+.txt-spoiler-btn {
+    content: "";
+    background-color: rgb(22, 22, 22);
+    color: transparent;
+    z-index: 20;
+    padding: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 8px;
+    width: calc(100% + 5px);
+    position: absolute;
+    cursor: pointer;
+}
+
+.txt-inlinecode {
+    content: "";
+    background-color: rgb(55, 55, 55);
+    padding: 0;
+    padding-right: 6px;
+    padding-left: 6px;
+    border-radius: 6px;
+    width: calc(100% + 5px);
+    text-align: center;
+}
+
+
+.txt-spoiler-btn:first-child {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.tagged {
+    background-color: rgba(255, 141, 0, 0.66);
+    border-left: 5px solid rgba(255, 141, 0, 1);
+    padding-left: 3px;
+    border-radius: 3px;
+}

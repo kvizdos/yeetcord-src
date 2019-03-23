@@ -26,11 +26,11 @@ function changeGuild(id, element) {
         renderUsers(id);
     }
 
+
     $('#contentArea').show();
     $('#channelList').show();
     $('#welcomeScreen').hide();
-    $('#userList').hide();
-
+    $('#userListContainer').children().hide();
     $('.userList-' + id).show();
 
     $('[class^=channel-]').hide();
@@ -48,9 +48,11 @@ function changeGuild(id, element) {
 }
 
 function joinServer() {
-    var id = $("#joinId").val();
-    var btn = $('#joinServer');
-    $('#joinId').val('');
+    var id = $("#modalInput").val();
+    var btn = $('#modalButton');
+    $('#modalInput').val('');
+    $('#modalInput').attr('disabled', true);
+    btn.text("Loading");
 
     if(id !== '') {
         btn.attr("disabled", "disabled");
@@ -67,15 +69,18 @@ function joinServer() {
                 var servers = JSON.parse(localStorage.getItem('servers')) !== null ? JSON.parse(localStorage.getItem('servers')) : [];
                 servers.push(id);
                 localStorage.setItem('servers', JSON.stringify(servers));
-                btn.removeClass('waiting');
-                btn.removeAttr('disabled');
 
                 updateServers(false);
             } else {
                 alert(resp['error']);
-                btn.removeClass('waiting');
-                btn.removeAttr('disabled');
             }
+
+            btn.removeClass('waiting');
+            btn.removeAttr('disabled');
+            $('#modalInput').removeAttr('disabled');
+            $('#modalOne').hide();
+
+            btn.text("Join");
         })
     }
 }
