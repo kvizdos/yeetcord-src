@@ -83,7 +83,7 @@ var ImageModal = function(modal) {
         
         <div id="modalBackground"></div>
         <div id="modalContainer">
-            <div id="modal">
+            <div id="modal" class="imageModal">
                 <a id="imgClick"><img id="modalImgUrl" src="" width=100% /></a>
             </div>
         </div>

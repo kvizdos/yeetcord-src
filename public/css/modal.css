@@ -31,6 +31,10 @@
     box-shadow: 0 0 20px 3px black;
 }
 
+.imageModal {
+    width: calc(100vh - 100px) !important;
+}
+
 #modalHeader {
     padding: 8px;
     margin: 0;
