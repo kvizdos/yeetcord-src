@@ -32,7 +32,7 @@
 }
 
 .imageModal {
-    width: calc(100vh - 100px) !important;
+    width: calc(100% - 75vw)!important;;
 }
 
 #modalHeader {
@@ -81,4 +81,8 @@
   #modal {
     width: 75%;
   }
+  .imageModal {
+    width: calc(100% - 25vw)!important;;
+    }
+
 }

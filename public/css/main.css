@@ -269,6 +269,13 @@ input {
     background-color: #1d1d1d;
     font-size: 14pt;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.guild {
+    height: 50px !important;
 }
 
 #serverName p {
@@ -323,4 +330,26 @@ input {
     background-position: center;
     background-size: contain;
     color: black !important;
+}
+
+#serverHeader {
+    height: 50px;
+    background-color: rgb(46, 46, 46);
+    font-size: 16pt;
+    font-weight: 500;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#serverHeader p {
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+}
+
+#serverHeader #serverHash {
+    font-weight: 100;
+    color: gray;
 }

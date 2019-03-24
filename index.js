@@ -82,7 +82,6 @@ function generateVerification(len = 8) {
 }
 
 
-var tempUsers = [];
 // SOCKET SHIT
 var Guild = function(id, name, channels, users) {
     this.id = id,
@@ -105,8 +104,7 @@ function escapeHtml(unsafe) {
  var dnCache = [];
 var onlineUsers = [];
 io.on('connection', function(socket){
-    tempUsers.push(socket.id);
-    _Logger.warn('New User Connected (#'+tempUsers.length+')');    
+    _Logger.warn('New User Connected (#'+onlineUsers.length+')');    
 
     socket.on('go online', function(username, guild) {
         var exists = onlineUsers.filter((u) => {
@@ -114,7 +112,7 @@ io.on('connection', function(socket){
         }).length == 1;
 
         if(!exists) {
-            onlineUsers.push({guild: guild, username: username});
+            onlineUsers.push({guild: guild, username: username, socket: socket.id});
         } 
 
         var usersOnlineAtm = onlineUsers.filter((u) => {
@@ -127,10 +125,23 @@ io.on('connection', function(socket){
     })
     
     socket.on('disconnect', function(){
-        io.emit("user offline");
+        var newUserList = onlineUsers.filter((u) => {
+            return u.socket !== socket.id;
+        });
 
-        activeChannels.splice(tempUsers.indexOf(socket.id), 1);
-        tempUsers.splice(tempUsers.indexOf(socket.id), 1);
+        var userGuilds = onlineUsers.filter((u) => {
+            return u.socket == socket.id;
+        });
+
+        _Logger.danger(`User (${socket.id}) disconnected!`)
+
+        if(userGuilds !== undefined) {
+            for(var i = 0; i < userGuilds.length; i++) {
+                io.to(userGuilds[i].guild).emit('user list', newUserList, userGuilds[i].guild);
+            }
+        }
+
+        //activeChannels.splice(tempUsers.indexOf(socket.id), 1);
     });
 
     socket.on('update servers', function(username, fn) {
@@ -156,6 +167,13 @@ io.on('connection', function(socket){
             fn(guilds);
         })
     });
+
+    /*
+    socket.on('hey im online', function(username) {
+        var guildUserIsIn = onlineUsers.filter((u) => {
+            return u
+        })
+    });*/
 
     socket.on('request history', function(info, fn) {
         client.guilds.get(info['guild']).channels.get(info['channel']).fetchMessages({limit: 100}).then(msgs => {

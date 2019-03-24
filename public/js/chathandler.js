@@ -20,7 +20,7 @@ function getHistory() {
                 if(attachments !== undefined && attachments.length > 0) {
                     if(message.length > 0) message += "<br/>";
                     for(var x = 0; x < attachments.length; x++) {
-                        message += `<img id="chatImg" onclick='viewImg("${attachments[x]}")' src='${attachments[x]}' width=250 />`;
+                        message += `<img id="chatImg" class="imgPreload" onclick='viewImg("${attachments[x]}")' src='${attachments[x]}' width=250 />`;
                     }
                     
                 }

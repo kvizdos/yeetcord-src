@@ -1,4 +1,4 @@
-<html>
+<html >
 	<head>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -10,7 +10,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+		<meta name="theme-color" content="#2c2c2c">
+		<link rel="manifest" href="js/manifest.json">
+
 		<title>Yeetcord</title>
 		
         <script src="/socket.io/socket.io.js"></script>
@@ -21,6 +23,8 @@
 		<link rel="stylesheet" href="./css/global.css">
 		<link rel="stylesheet" href="./css/modal.css">
 		<link rel="stylesheet" href="./css/richchat.css">
+		<link rel="stylesheet" href="./css/alerts.css">
+		<link rel="stylesheet" href="./css/contextMenu.css">
 
 		<script src="./js/ProgressHandler.js"></script>
 
@@ -41,12 +45,14 @@
 		<script src="./js/EmojiList.js"></script>
 		<script src="./js/EmojiHandler.js"></script>
 		
+		<script src="./js/ContextMenu.js"></script>
 
 		<script src="./js/main.js"></script>
 	</head>
 	<body>
 		<div id="modalOne"></div>
 		<div id="imgModal"></div>
+		<div id="contextMenu"></div>
 		<div class="container-fluid" id="loadingScreen">
 			<div id="loadContainer">
 				<img src="assets/logo.png" width="250px">
@@ -70,15 +76,16 @@
 				</div>
 				<div class="col-sm-1" id="channelList">
 					<div id="serverInfo">
-						<p id="serverName">Test</p>
+						<p id="serverName" class="guild"></p>
 					</div>
-					<div id="channelContainer">
-					</div>
+					<div id="channelContainer"></div>
 				</div>
 				<div class="col-sm-9" id="contentArea">
-					<div id="messages">
-						
+					<div id="serverHeader">
+						<p><span id="serverHash">#</span> <span id="serverGuild">general</span></p>
 					</div>
+					
+					<div id="messages"></div>
 					<div id="inputContainer" class="bottom-column">
 						<div id="tagList"></div>
 						<div id="emojiList"></div>
@@ -115,4 +122,18 @@
 			</div>
 		</div>
 	</body>
+
+	<script>
+		if ('serviceWorker' in navigator) {
+                        
+            navigator.serviceWorker.register('/js/sw.js').then(function (registration) {
+                
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function (err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
+    </script>
 </html>

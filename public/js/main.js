@@ -3,6 +3,7 @@ var _Modal = new Modal('#modalOne');
 var _ModalImg = new ImageModal('#imgModal');
 var Emoji = new Emoji("Main");
 var Progress = new Progress('#progressContainer', 0);
+var CM = new ContextMenu('#contextMenu');
 
 if(auth == null) {
     alert("Username/token mismatch! Please relogin!");
@@ -138,6 +139,7 @@ $(document).ready(function() {
     _Modal.register();
     Progress.addPercent(16.66);
     _ModalImg.register();
+    //CM.register();
     Progress.addPercent(16.66);
 
     setTimeout(function() {
@@ -205,7 +207,7 @@ socket.on('receive message', function(msg) {
         if(attachments !== undefined && attachments.length > 0) {
             if(message.length > 0) message += "<br/>";
             for(var i = 0; i < attachments.length; i++) {
-                message += `<img id="chatImg" onclick='viewImg("${attachments[i]}")' src='${attachments[i]}' width=250 />`;
+                message += `<img id="chatImg" class="imgPreload" onclick='viewImg("${attachments[i]}")' src='${attachments[i]}' width=250 />`;
             }
         }
 

@@ -10,6 +10,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#2c2c2c">
+		<link rel="manifest" href="js/manifest.json">
 		
 		<title>Login</title>
         <link rel="stylesheet" href="./css/login.css">
@@ -42,4 +45,18 @@
             </div>
         </div>
     </body>
+
+	<script>
+		if ('serviceWorker' in navigator) {
+                        
+            navigator.serviceWorker.register('/js/sw.js').then(function (registration) {
+                
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function (err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
+    </script>
 </html>

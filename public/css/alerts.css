@@ -1,0 +1,12 @@
+#alertBar {
+    text-align: center;
+    background-color: gray;
+    padding: 0;
+    margin: 0;
+}
+
+#alertBar p {
+    padding: 5px;
+    font-weight: bold;
+    margin: 0;
+}

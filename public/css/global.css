@@ -66,3 +66,8 @@ button.waiting {
     margin: 0 auto;
     background-color: rgb(15, 15, 15);
 }
+
+.imgPreload {
+    width: 250px;
+    background-color: #5e5e5e;
+}

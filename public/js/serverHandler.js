@@ -14,6 +14,8 @@ function changeChannel(id, element) {
     getHistory();
 
     deleteBadges(localStorage.getItem('guild'), localStorage.getItem('channel'));
+    
+    $('#serverGuild').text($('.activeChannel')[0].innerText.slice(1, $('.activeChannel')[0].innerText.length));
 }
 var alreadyOnline = [];
 function changeGuild(id, element) {
@@ -125,3 +127,4 @@ function sendMessage(mes) {
     var msg = new Message(username, message, (new Date).getTime(), JSON.parse(localStorage.getItem('auth'))['verified'], localStorage.getItem('guild'), localStorage.getItem('channel'), generateVerification(), getCookie('token'), JSON.parse(localStorage.getItem('auth'))['us']);
     socket.emit('send message', JSON.stringify(msg));
 }
+
