@@ -353,3 +353,21 @@ input {
     font-weight: 100;
     color: gray;
 }
+
+#serverHeader #rightAlign {
+    margin-left: auto;
+}
+
+#serverHeader #rightAlign i {
+    padding-right: 15px;
+}
+
+#serverHeader .toggleMems:hover {
+    cursor: pointer;
+    color: rgb(211, 211, 211);
+    transition: 250ms;
+}
+
+#serverHeader .nbDisabled {
+    color: rgb(211, 211, 211) !important;
+}

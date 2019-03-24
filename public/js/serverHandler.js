@@ -1,5 +1,6 @@
 var activeChannel = "";
 var activeGuild = "";
+var membersHidden = false;
 
 function changeChannel(id, element) {
     localStorage.setItem('channel', id);
@@ -45,11 +46,13 @@ function changeGuild(id, element) {
         $('#channelList').show();
         $('#welcomeScreen').hide();
 
-        $('#userListContainer').show();
 
-        $('#userListContainer').children().hide();
-        $('.userList-' + id).show();
+        if(!membersHidden) {
+            $('#userListContainer').show();
 
+            $('#userListContainer').children().hide();
+            $('.userList-' + id).show();
+        }
         $('[class^=channel-]').hide();
         $('.activeChannel').removeClass('activeChannel');
         $('[class^=for-]').hide();
@@ -128,3 +131,17 @@ function sendMessage(mes) {
     socket.emit('send message', JSON.stringify(msg));
 }
 
+function toggleMembers() {
+    $('#userListContainer').toggle();
+    if(!$("#userListContainer").is(':visible')) {
+        $('#contentArea').removeClass('col-sm-9');
+        $('#contentArea').addClass('col-sm-10');
+        $('.toggleMems').addClass('nbDisabled');
+        membersHidden = true;
+    } else {
+        $('#contentArea').removeClass('col-sm-10');
+        $('#contentArea').addClass('col-sm-9');
+        $('.toggleMems').removeClass('nbDisabled');
+        membersHidden = false;
+    }
+}

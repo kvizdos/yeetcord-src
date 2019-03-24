@@ -1,5 +1,7 @@
 <html >
 	<head>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
@@ -83,6 +85,9 @@
 				<div class="col-sm-9" id="contentArea">
 					<div id="serverHeader">
 						<p><span id="serverHash">#</span> <span id="serverGuild">general</span></p>
+						<div id="rightAlign">
+							<i class="fas fa-user-friends toggleMems" onclick="toggleMembers()"></i>
+						</div>
 					</div>
 					
 					<div id="messages"></div>
