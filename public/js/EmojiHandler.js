@@ -1,4 +1,5 @@
-var Emoji = function() {
+var Emoji = function(name) {
+    this.em = name,
     this.search = (emoji, where) => {
         var foundEmoji = EmojiList.filter((e) => {
             return e.name.toLowerCase().replace(" ", "_").indexOf(emoji) >= 0;

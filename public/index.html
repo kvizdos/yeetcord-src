@@ -22,6 +22,8 @@
 		<link rel="stylesheet" href="./css/modal.css">
 		<link rel="stylesheet" href="./css/richchat.css">
 
+		<script src="./js/ProgressHandler.js"></script>
+
 		<script src="./js/globals.js"></script>
 		<script src="./js/tagHandler.js"></script>
 
@@ -38,12 +40,24 @@
 		
 		<script src="./js/EmojiList.js"></script>
 		<script src="./js/EmojiHandler.js"></script>
+		
 
 		<script src="./js/main.js"></script>
 	</head>
 	<body>
 		<div id="modalOne"></div>
 		<div id="imgModal"></div>
+		<div class="container-fluid" id="loadingScreen">
+			<div id="loadContainer">
+				<img src="assets/logo.png" width="250px">
+				<br>
+				<h2>Loading..</h2>
+				<br>
+				<div id="progressContainer">
+					<div id="progress">&nbsp;</div>
+				</div>
+			</div>
+		</div>
 		<div class="container-fluid" id="msgArea">
 			<div class="row">
 				<div class="col-sm-1" id="serverList">
@@ -55,6 +69,9 @@
                     </div>
 				</div>
 				<div class="col-sm-1" id="channelList">
+					<div id="serverInfo">
+						<p id="serverName">Test</p>
+					</div>
 					<div id="channelContainer">
 					</div>
 				</div>

@@ -13,6 +13,19 @@ window.onload = function() {
                                 "Hey @%%you%%, tagging users are now a thing!",
                                 "Grouped messages!"
                             ]
+                        },
+                        {
+                            "version": "1.1b",
+                            "title": "Just a lot of new stuff..",
+                            "desc": "Mainly being, the new UI!",
+                            "changelog": [
+                                "New UI!!! Wahoo! Still early, but it's much better imo.",
+                                "Emojis!! :<emoji>:",
+                                "Max character count per message (2k)",
+                                "You can now see images posted!!",
+                                "Rich Chat. Now you can bold, italicize, etc (mostly everything that Discord can do in the same way!)",
+                                "Fixed user lists-ish"
+                            ]
                         }
                     ]
     

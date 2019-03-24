@@ -1,7 +1,8 @@
 var auth = JSON.parse(localStorage.getItem('auth'));
 var _Modal = new Modal('#modalOne');
 var _ModalImg = new ImageModal('#imgModal');
-var Emoji = new Emoji();
+var Emoji = new Emoji("Main");
+var Progress = new Progress('#progressContainer', 0);
 
 if(auth == null) {
     alert("Username/token mismatch! Please relogin!");
@@ -42,8 +43,6 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
                 shortName = shortName.join("");
                 $('#serverContainer').append(`<p id="serverName" onclick="changeGuild('${data[i]['id']}', this)">${shortName} <span class='nb-g-${data[i]['id']}'></span></p>`)
                 
-                console.log($('#userListContainer').children());
-                console.log("Adding server: " + data[i]['id']);
                 $('#userListContainer').append(`
                 <div class="col-sm-1 userList-${data[i]['id']}" id="userList">
                     <br>
@@ -68,7 +67,11 @@ function updateServers(docache = localStorage.getItem('serverCache') !== null ? 
                 $('#serverContainer').empty();
                 $('#channelContainer').empty();
                 $('#messages').empty();
-    
+                $('#serverContainer').append(`
+                    <div id="serverName" class="homeServer" onclick="changeGuild('HOME', '')">
+                        Home
+                    </div>`)
+
                 localStorage.setItem('serverCache', JSON.stringify(data));
                 for(var i = 0; i < data.length; i++) {
                     var shortName = data[i]['name'];
@@ -124,14 +127,24 @@ var channel = localStorage.getItem('channel');
 
 $(document).ready(function() {
     var input = document.getElementById("newMsg");
+    Progress.addPercent(16.66);
     var room = `.channel-${channel}#messageArea`;
+    Progress.addPercent(16.66);
     $('[class^=userList-]').hide();
+    Progress.addPercent(16.66);
 
     loadItems();
+    Progress.addPercent(16.66);
     _Modal.register();
+    Progress.addPercent(16.66);
     _ModalImg.register();
+    Progress.addPercent(16.66);
 
-    $(room).show();
+    setTimeout(function() {
+        $('#loadingScreen').hide();
+        $('#msgArea').show();
+        $(room).show();
+    }, 500)
     
     // Execute a function when the user releases a key on the keyboard
     input.addEventListener("keyup", function(event) {
@@ -287,7 +300,7 @@ function logout() {
 
 function joinGuild() {
     _Modal.header = "Join a guild";
-    _Modal.text = "Please input the guild id below.";
+    _Modal.text = "Please input the guild id below.<br><a href='https://discordapp.com/oauth2/authorize?client_id=545363820101763115&scope=bot&permissions=8'>Looking to add the proxy to your own server? Click here!</a>";
     _Modal.showActions(1, "ID Here", "Join", joinServer);
 }
 

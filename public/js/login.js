@@ -68,7 +68,6 @@ function login() {
     if((username !== '') && (password !== '')) {
         req.send(req.post).then((resp) => {
             resp = JSON.parse(resp);
-            console.log(resp);
             if(resp['status'] == "complete") {
                 $('.alertMsg').text("Logged in, you will be redirected momentarily");
                 $('.alertSuccess').show(500);

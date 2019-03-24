@@ -1,4 +1,4 @@
-var Emoji = new Emoji();
+var Emoji = new Emoji("RichChat");
 
 function RichChat(msg = "") {
     // Handle Bolding

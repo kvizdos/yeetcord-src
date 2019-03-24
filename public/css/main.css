@@ -16,28 +16,10 @@ body {
     padding: 0;
 }
 
-#serverHeader {
-    background-color: #072c63;
-    width: 100%;
-    font-size: 14pt;
-    border: 0;
-    color: white;
-    padding: 10px;
-}
-
 #serverHeader input {
     width: 100%;
     padding: 5px;
     color: black;
-}
-
-#serverHeader button {
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 0;
-    width: 100%;
-    background-color: #376ab8;
-
 }
 
 #serverActions {
@@ -52,7 +34,7 @@ body {
 }
 
 #serverActions button {
-    background-color: #072c63;
+    background-color: #353535;
     width: 100%;
     font-size: 14pt;
     padding: 19px;
@@ -166,6 +148,7 @@ input {
     overflow: hidden;
     border-top: 1px solid #5e5e5e;
     font-size: 14pt;
+    margin: 5px;
 }
 
 #msgUsername {
@@ -173,6 +156,7 @@ input {
     font-size: 15pt;
     font-weight: bold;
     color: #ffffff;
+    padding-bottom: 5px;
 }
 
 #verifArea input {
@@ -259,6 +243,7 @@ input {
 #chatImg {
     border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0 0 5px 0px #252525;
 }
 
 #emojiList {
@@ -276,4 +261,66 @@ input {
 
 .emojiName {
     color: white !important;
+}
+
+#serverName {
+    padding: 10px;
+    text-align: center;
+    background-color: #1d1d1d;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#serverName p {
+    padding: 0;
+    margin: 0;
+}
+
+#welcomeScreen {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+#msgArea {
+    display: none;
+}
+
+#loadingScreen {
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#loadContainer h2 {
+    font-weight: bold;
+}
+
+#loadContainer img {
+    border-radius: 100%;
+    box-shadow: 0 0 20px 0px black;
+}
+
+#progressContainer {
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #4c4c4c;
+    height: 5px;
+}
+
+#progress {
+    width: 0%;
+    transition: 150ms;
+    background-color: #848484;
+}
+
+.homeServer {
+    background-image: url(../assets/logo.png);
+    background-position: center;
+    background-size: contain;
+    color: black !important;
 }

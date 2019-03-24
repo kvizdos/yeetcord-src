@@ -6,11 +6,8 @@ function findTag(word, where) {
 
     if(word.indexOf('@') == 0 && word.length !== 1) {
         var found = activeUsers.filter((u) => {
-            console.log("HERE: " + u.username);
             return (u.username.indexOf(username) >= 0 || u.username == username);
         }).slice(0, 3);
-
-        console.log(where + " - " + found);
 
         renderFound(where, found);
         return;
@@ -26,8 +23,6 @@ function renderFound(where, found, disable = false) {
     if(!disable) {
         $(where).show(100);
         found.forEach((f) => {
-            console.log(f)
-
             newText += "<p>" + f.username + "</p>"
         })
         $(where).html(newText);

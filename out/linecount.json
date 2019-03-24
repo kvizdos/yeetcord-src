@@ -846,6 +846,252 @@
                     "filename": "util\\security.js"
                 }
             ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-03-23 22:14:18",
+            "filesum": 39,
+            "codesum": 9540,
+            "commentsum": 90,
+            "blanksum": 400,
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 21,
+                    "comment": 2,
+                    "filename": "build.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "discord\\config.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "discord\\servers.json"
+                },
+                {
+                    "blank": 25,
+                    "code": 70,
+                    "comment": 3,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 835,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "public\\assets\\changelog.json"
+                },
+                {
+                    "filename": "public\\assets\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\assets\\notif.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 9,
+                    "code": 56,
+                    "comment": 3,
+                    "filename": "public\\css\\global.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "public\\css\\login.css"
+                },
+                {
+                    "blank": 55,
+                    "code": 279,
+                    "comment": 1,
+                    "filename": "public\\css\\main.css"
+                },
+                {
+                    "blank": 10,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "public\\css\\modal.css"
+                },
+                {
+                    "blank": 10,
+                    "code": 62,
+                    "comment": 1,
+                    "filename": "public\\css\\richchat.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "public\\css\\verify.css"
+                },
+                {
+                    "blank": 19,
+                    "code": 85,
+                    "comment": 13,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "public\\js\\changelogHandler.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 49,
+                    "comment": 2,
+                    "filename": "public\\js\\chathandler.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "public\\js\\EmojiHandler.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6578,
+                    "comment": 0,
+                    "filename": "public\\js\\EmojiList.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 107,
+                    "comment": 0,
+                    "filename": "public\\js\\globals.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "public\\js\\loadHandler.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": "public\\js\\login.js"
+                },
+                {
+                    "blank": 56,
+                    "code": 242,
+                    "comment": 7,
+                    "filename": "public\\js\\main.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 71,
+                    "comment": 21,
+                    "filename": "public\\js\\modalHandler.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 69,
+                    "comment": 5,
+                    "filename": "public\\js\\notifHandler.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "public\\js\\ProgressHandler.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 56,
+                    "comment": 7,
+                    "filename": "public\\js\\RichChatHandler.js"
+                },
+                {
+                    "blank": 24,
+                    "code": 87,
+                    "comment": 0,
+                    "filename": "public\\js\\serverHandler.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "public\\js\\tagHandler.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "public\\js\\userHandler.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 33,
+                    "comment": 3,
+                    "filename": "public\\login.html"
+                },
+                {
+                    "blank": 8,
+                    "code": 19,
+                    "comment": 2,
+                    "filename": "public\\verify.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "routes\\middleware.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "routes\\router.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "routes\\user.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 158,
+                    "comment": 1,
+                    "filename": "util\\handlers.js"
+                },
+                {
+                    "blank": 20,
+                    "code": 166,
+                    "comment": 17,
+                    "filename": "util\\mongo.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "util\\security.js"
+                }
+            ]
         }
     ]
 }

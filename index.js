@@ -44,6 +44,10 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'login.html'));
 });
 
+app.get('/stats', (req, res) => {
+    res.sendFile(path.join(__dirname, './public', 'stats.html'));
+})
+
 app.get('/verify', (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'verify.html'));
 });
@@ -105,12 +109,26 @@ io.on('connection', function(socket){
     _Logger.warn('New User Connected (#'+tempUsers.length+')');    
 
     socket.on('go online', function(username, guild) {
-        io.to(guild).emit('new user', username, guild)
+        var exists = onlineUsers.filter((u) => {
+            return u.username == username && u.guild == guild;
+        }).length == 1;
 
+        if(!exists) {
+            onlineUsers.push({guild: guild, username: username});
+        } 
+
+        var usersOnlineAtm = onlineUsers.filter((u) => {
+            return u.guild == guild;
+        })
+
+        io.to(guild).emit('user list', usersOnlineAtm, guild);
+
+        //io.to(guild).emit('new user', username, guild)
     })
     
     socket.on('disconnect', function(){
-        io.emit("user offline", )
+        io.emit("user offline");
+
         activeChannels.splice(tempUsers.indexOf(socket.id), 1);
         tempUsers.splice(tempUsers.indexOf(socket.id), 1);
     });
@@ -327,10 +345,8 @@ client.on('message', async message => {
             });
         }
 
-        console.log(atts);
         var newMsg = new Message(message.author.username, message.content, message.createdTimestamp, true, message.guild.id, message.channel.id, message.id, atts);
 
-        console.log(message.attachments.size > 0);
         newMsg.message = escapeHtml(newMsg.message);
         
         io.to(newMsg.guild).emit('receive message', JSON.stringify(newMsg));

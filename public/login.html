@@ -20,23 +20,25 @@
 
     </head>
     <body>
-        <div id="loginContainer">
-            <h1>Login / Register</h1>
-            <div id="container">
-                <div id="alert" class="alertDanger">
-                    <span class="alertMsg"></span>
+        <div id="center">
+            <div id="loginContainer">
+                <h1>Login / Register</h1>
+                <div id="container">
+                    <div id="alert" class="alertDanger">
+                        <span class="alertMsg"></span>
+                    </div>
+                    <div id="alert" class="alertSuccess">
+                        <span class="alertMsg"></span>
+                    </div>
+                    <input placeholder="Username" id="loginUsername"><br>
+                    <input placeholder="Password" id="loginPassword" type="password"><br>
+                    <button onclick='login()' id="loginBtn">Login</button>
+                    
+                    <p>Or Signup:</p>
+                    <input placeholder="Username" id="createUsername"><br>
+                    <input placeholder="Password" id="createPassword" type="password"><br>
+                    <button onclick='signup()' id="registerBtn">Register</button>
                 </div>
-                <div id="alert" class="alertSuccess">
-                    <span class="alertMsg"></span>
-                </div>
-                <input placeholder="Username" id="loginUsername"><br>
-                <input placeholder="Password" id="loginPassword" type="password"><br>
-                <button onclick='login()' id="loginBtn">Login</button>
-                
-                <p>Or Signup:</p>
-                <input placeholder="Username" id="createUsername"><br>
-                <input placeholder="Password" id="createPassword" type="password"><br>
-                <button onclick='signup()' id="registerBtn">Register</button>
             </div>
         </div>
     </body>

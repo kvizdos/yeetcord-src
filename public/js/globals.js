@@ -40,7 +40,6 @@ function Message(user, message, timestamp, isVerified = false, guild, channel, i
         return this.guild
     },
     this.delete = function() {
-        console.log(this.user + " - " + this.message + " - " + this.timestamp);
         messages = messages.filter((m) => {
             return (m.id !== this.id);
         })

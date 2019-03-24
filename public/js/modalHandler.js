@@ -43,8 +43,8 @@ var Modal = function(modal) {
         $(this.selector).hide();
     },
     this.showActions = (type, placeholder = "", placeholder2 = "", btnActions = "") => {
-        $(this.selector + " #modal #modalHeader").text(this.header);
-        $(this.selector + " #modal #modalText").text(this.text);
+        $(this.selector + " #modal #modalHeader").html(this.header);
+        $(this.selector + " #modal #modalText").html(this.text);
         $(this.selector + " #modal #modalActions").show();
         switch(type) {
             case 0:
@@ -62,8 +62,8 @@ var Modal = function(modal) {
 
     },
     this.show = () => {
-        $(this.selector + " #modal #modalHeader").text(this.header);
-        $(this.selector + " #modal #modalText").text(this.text);
+        $(this.selector + " #modal #modalHeader").html(this.header);
+        $(this.selector + " #modal #modalText").html(this.text);
         $(this.selector + " #modal #modalActions").hide();
         $(this.selector).show();
     },
@@ -84,7 +84,7 @@ var ImageModal = function(modal) {
         <div id="modalBackground"></div>
         <div id="modalContainer">
             <div id="modal">
-                <img id="modalImgUrl" src="" width=100% />
+                <a id="imgClick"><img id="modalImgUrl" src="" width=100% /></a>
             </div>
         </div>
         `)
@@ -92,6 +92,7 @@ var ImageModal = function(modal) {
         $(this.selector).hide();
     }
     this.show = (url) => {
+        $('#imgClick').attr('href', url);
         $('#modalImgUrl').attr('src', url);
         $(modal).show();
     }

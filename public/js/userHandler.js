@@ -11,11 +11,21 @@ socket.on("new user", (username, guild) => {
     var newUser = new User(username, guild);
     users.push(newUser)
 
-    renderUsers(guild);
+    renderUsers(guild, users);
 })
 
-function renderUsers(guild) {
-    var usersInGuild = users.filter((u) => {
+socket.on('user list', (userz, guild) => {
+    users = [];
+    userz.forEach((u) => {
+        var newUser = new User(u.username, guild);
+        users.push(newUser);
+    })
+
+    renderUsers(guild, users);
+})
+
+function renderUsers(guild, userList) {
+    var usersInGuild = userList.filter((u) => {
         return u.guild == guild;
     })
 

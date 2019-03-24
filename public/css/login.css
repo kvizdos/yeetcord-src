@@ -7,6 +7,7 @@
     border-radius: 15px !important;
     overflow: hidden;
     padding: 0;
+    box-shadow: 0 0 20px 0px black;
 }
 
 #loginContainer h1 {
@@ -14,11 +15,11 @@
     padding: 10px;
     color: white;
     font-weight: bold;
-    background-color: #134da5;
+    background-color: rgb(15, 15, 15);
 }
 #loginContainer #container {
     padding: 10px;
-    background-color: #376ab8;
+    background-color: #383838;
 }
 
 #loginContainer #container input {
@@ -30,7 +31,7 @@
 }
 
 #loginContainer #container button {
-    background-color: #0d4eaf;
+    background-color: rgb(15, 15, 15);
     border: 0;
     border-radius: 5px;
     padding: 10px;
@@ -43,4 +44,15 @@
     color: white;
     margin: 5px; 
     margin-top: 15px;  
+}
+
+#center {
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: #383838;
 }

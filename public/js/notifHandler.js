@@ -58,8 +58,6 @@ var createNotification = function(username, body, guildName, guild, channel, act
                 if(this.activeChannel !== this.channel) $('.nb-c-' + this.guild + "-" + this.channel).text((channelCount + 1).toString());
                 if(this.activeGuild !== this.guild) $('.nb-g-' + this.guild).text((count + 1).toString());
 
-                if(this.activeGuild !== this.guild) console.log('.nb-g-' + this.guild + " !");
-
                 if(this.activeGuild !== this.guild) {
                     if(count > 0) {
                         count++;
