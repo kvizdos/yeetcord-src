@@ -134,13 +134,13 @@ function sendMessage(mes) {
 function toggleMembers() {
     $('#userListContainer').toggle();
     if(!$("#userListContainer").is(':visible')) {
-        $('#contentArea').removeClass('col-sm-9');
-        $('#contentArea').addClass('col-sm-10');
+        $('#contentArea').removeClass('col-sm-8');
+        $('#contentArea').addClass('col-sm-9');
         $('.toggleMems').addClass('nbDisabled');
         membersHidden = true;
     } else {
-        $('#contentArea').removeClass('col-sm-10');
-        $('#contentArea').addClass('col-sm-9');
+        $('#contentArea').removeClass('col-sm-9');
+        $('#contentArea').addClass('col-sm-8');
         $('.toggleMems').removeClass('nbDisabled');
         membersHidden = false;
     }
