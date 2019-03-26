@@ -1,0 +1,38 @@
+#gamesContainer {
+    height: 250px;
+    margin-top: 25px;
+}
+
+#game {
+    height: 100%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: inset 0 0 11px 0px black;   
+    background-position: center;
+}
+
+#gameContent {
+    background-color: rgba(0, 0, 0, .5);
+    padding: 12px;
+    border-radius: 5px;
+}
+
+#gameContent h2 {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+#gameContent button {
+    width: 100px;
+    background-color: #3f75ec;
+    border: 0;
+    border-radius: 5px;
+}
+.agar {
+    background-image: url('../assets/games/agar.jpg');
+}

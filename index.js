@@ -48,6 +48,10 @@ app.get('/stats', (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'stats.html'));
 })
 
+app.get('/uptime/ping', (req, res) => {
+    res.end("pong");
+})
+
 app.get('/verify', (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'verify.html'));
 });
@@ -68,6 +72,14 @@ app.post('/join', mw.isAuthenticated, function(req, res) {
 
 
 app.use(require('./routes/user'))
+
+// START GAME HANDLER
+var GameHandler = require('./games/GameHandler');
+var GameRouter = GameHandler.router;
+GameHandler.SocketHandler(io);
+
+app.use(GameRouter)
+// END GAME HANDLER
 
 function generateVerification(len = 8) {
     var possibilites = "abcdefghijklmnopqrstuvwxyz1234567890";

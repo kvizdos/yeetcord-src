@@ -4,6 +4,7 @@ var _ModalImg = new ImageModal('#imgModal');
 var Emoji = new Emoji("Main");
 var Progress = new Progress('#progressContainer', 0);
 var CM = new ContextMenu('#contextMenu');
+var _GameList = new GameList("#gamesContainer");
 
 if(auth == null) {
     alert("Username/token mismatch! Please relogin!");
@@ -140,6 +141,7 @@ $(document).ready(function() {
     Progress.addPercent(16.66);
     _ModalImg.register();
     //CM.register();
+    _GameList.registerGame("Bubblio", "A recreation of the popular game Agario. Early beta. Please report any bugs to the Yeetcord Central server!!", true, true, "bubblio");
     Progress.addPercent(16.66);
 
     setTimeout(function() {

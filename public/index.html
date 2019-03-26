@@ -27,6 +27,7 @@
 		<link rel="stylesheet" href="./css/richchat.css">
 		<link rel="stylesheet" href="./css/alerts.css">
 		<link rel="stylesheet" href="./css/contextMenu.css">
+		<link rel="stylesheet" href="./css/gameContainer.css">
 
 		<script src="./js/ProgressHandler.js"></script>
 
@@ -37,6 +38,7 @@
         <script src="./js/serverHandler.js"></script>
 		<script src="./js/userHandler.js"></script>
 		<script src="./js/chathandler.js"></script>
+		<script src="./js/GameList.js"></script>
 
 		<script src="./js/changelogHandler.js"></script>
 
@@ -59,7 +61,8 @@
 			<div id="loadContainer">
 				<img src="assets/logo.png" width="250px">
 				<br>
-				<h2>Loading..</h2>
+				<h2 id="progressHeader">Loading..</h2>
+				<p id="progressMsg"></p>
 				<br>
 				<div id="progressContainer">
 					<div id="progress">&nbsp;</div>
@@ -107,6 +110,8 @@
 				<div id="userListContainer"></div>
 
 				<div class="col-sm-11" id="welcomeScreen">
+					<div id="gamesContainer"></div>
+	
 					<h1>Welcome.</h1>
 					<p>To get the Yeetcord Proxy Bot enabled on your server <a href="https://discordapp.com/oauth2/authorize?client_id=545363820101763115&scope=bot&permissions=8">Click Here</a></a></p>
 					<h2>Version History</h2>

@@ -187,12 +187,14 @@ input {
     background-color: #1f1f1f;
     height: 100%;
     color: white;
+    overflow: hidden;
 }
 
 #userList p {
     text-align: center;
     padding: 5px;
     font-size: 14pt;
+    overflow: hidden;
 }
 
 [class^='nb-g-'] {
@@ -324,6 +326,31 @@ input {
     transition: 150ms;
     background-color: #848484;
 }
+
+.disconnectTxt {
+    color: #e2391d;
+}
+
+.disconnectProgressContainer {
+    background-color: #7f3838 !important;
+}
+
+.disconnect {
+    background-color: #c53f3f !important;
+}
+
+.reconnectTxt {
+    color: #30da30;
+}
+
+.reconnectProgressContainer {
+    background-color: #15c315 !important;
+}
+
+.reconnect {
+    background-color: #15c315 !important;
+}
+
 
 .homeServer {
     background-image: url(../assets/logo.png);

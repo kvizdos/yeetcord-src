@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>Bubblio</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="user-scalable=no" />
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io()
+        </script>
+        <script src="./assets/bubblio.js"></script>
+
+        <style>
+            body {
+                overflow: hidden;
+                margin: 0;
+            }
+            #game {
+                overflow: hidden;
+                background-image: url('/games/bubblio/assets/background.jpg');
+            }
+
+            #modalContainer {
+                position: fixed;
+                z-index: 10;
+                background-color: rgba(0, 0, 0, .75);
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #modal {
+                text-align: center;
+                background-color: #ececec;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px 2px #2132ff;
+            }
+
+            #modalHeader, #modalTxt {
+                margin: 0;
+                padding: 5px;
+            }
+
+            #modal input {
+                border-radius: 5px;
+                border: 0;
+                padding: 5px;
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+
+            #modal button {
+                padding: 5px;
+                border: 0;
+                border-radius: 5px;
+                background-color: rgb(9, 61, 202);
+                color: white;
+                width: 100%;
+            }
+
+            #leaderboard {
+                position: fixed;
+                background-color: rgba(255, 255, 255, .75);
+                padding: 5px;
+                margin: 20px;
+                border-radius: 4px;
+            }
+
+            #leaderboard p {
+                margin: 0;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="modalContainer">
+            <div id="modal">
+                <h2 id="modalHeader">Welcome</h2>
+                <p id="modalTxt">Input a nickname below to play!</p>
+                <input id="nickname" placeholder="My Awesome Nickname" />
+                <br>
+                <button onclick="play()">Play</button>
+            </div>
+        </div>
+
+        <div id="leaderboard">
+            <p>Waiting</p>
+        </div>
+        <canvas id="game" width="5000" height="5000" style="border: 1px solid red;"></canvas>
+    </body>
+</html>
