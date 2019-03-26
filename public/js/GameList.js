@@ -9,7 +9,7 @@ var GameList = function(containerId) {
 				<div id="gameContent">
 					<h2>${name}</h2>
 					<p>${description}</p>
-					<button onclick='playGame("${name.toLowerCase()}")'>${published ? !beta ? "Play!" : "Play (beta)!" : "Coming Soon!"}</button>
+					<button onclick='playGame("${published ? name.toLowerCase() : null}")'>${published ? !beta ? "Play!" : "Play (beta)!" : "Coming Soon!"}</button>
 				</div>
 			</div>
         `)
@@ -22,6 +22,8 @@ function playGame(game) {
     switch(game) {
         case "bubblio":
             window.location = "/games/bubblio"
+            break;
+        case null: 
             break;
     }
 }
