@@ -141,7 +141,7 @@ $(document).ready(function() {
     Progress.addPercent(16.66);
     _ModalImg.register();
     //CM.register();
-    _GameList.registerGame("Bubblio", "A recreation of the popular game Agario. Early beta. Please report any bugs to the Yeetcord Central server!!", true, true, "bubblio");
+    _GameList.registerGame("Bubblio", "A recreation of the popular game Agario. Early beta. Please report any bugs to the Yeetcord Central server!!", false, true, "bubblio");
     Progress.addPercent(16.66);
 
     setTimeout(function() {
